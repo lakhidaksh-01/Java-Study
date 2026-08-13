@@ -1,0 +1,419 @@
+Hibernate is used to automate database persistence by mapping Java objects to relational database tables, reducing manual JDBC and SQL code.
+
+Hibernate is a Java framework that implements ORM.
+
+
+What is ORM?
+
+Object-Relational Mapping - the technique of Mapping Java objects to database tables.
+
+
+why we use Hibernate?
+
+- Eliminates the need for manual JDBC and SQL code.
+- Automatic transaction management.
+- portability across different databases.
+- Reduces SQL dependency with HQL (Hibernate Query Language).
+
+
+JDBC vs JPA vs Hibernate
+
+JDBC (Java Database Connectivity) - Direct database interaction using SQL.
+JPA (Jakarta Persistence API) is a specification/standard for ORM in Java.
+Hibernate is a popular framework that implements the JPA specification with adavance features.
+
+example : Imagine cars.
+JPA = the driving rules / standard
+Hibernate = a specific car that follows those rules
+
+
+
+Core Components of Hibernate:
+
+SessionFactory: Responsible for creating Session objects.
+Session: Represents a conversation between the application and the database.(short-lived object)
+Transaction: Manages commit and rollback of database operations.
+Query & Criteria API: Used to execute HQL (Hibernate Query Language) or native SQL queries.
+Hibernate Configuration File: Used to configure Hibernate settings and database connection properties.(hibernate.cfg.xml)
+
+
+Steps to use Hibernate:
+1. Load Hibernate Configuration File (hibernate.cfg.xml).
+2. Create SessionFactory from Configuration.
+3. Open a Session from SessionFactory.
+4. Begin a Transaction.
+5. Perform CRUD operations (Create, Read, Update, Delete).
+6. Commit the Transaction.
+7. Close the Session and SessionFactory.
+
+
+Artifact id - name of the jar file ex
+
+Jakarta Persistence defines how Java objects should map to database tables. Hibernate reads those annotations and performs the actual database work.
+
+
+Dependences
+
+ <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <version>9.7.0</version>
+      <scope>compile</scope>
+    </dependency>
+  <!-- Source: https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+  <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>7.4.5.Final</version>
+      <scope>compile</scope>
+  </dependency>
+
+
+
+
+hibernate.cfg.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+	    <!-- Database configuration -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hiber</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">DakshLakhi@123</property>
+
+		<!-- Hibernate configuration -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Add your annotated entity classes here -->
+        <mapping class="com.daksh.hibernate_demo.entities.Student"/>
+
+    </session-factory>
+</hibernate-configuration>
+
+
+
+
+enity class
+
+package com.daksh.hibernate_demo.entities;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
+@Entity
+@Table(name="students")
+public class Student {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
+	private int id;
+	@Column(name="name", length=100, unique=true)
+	private String name;
+	
+	@Column(name="city", length=100, nullable=true)
+	private String city;
+	
+	@Lob
+	private String review;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
+	
+}
+
+
+
+session factory
+
+package com.daksh.hibernate_demo.util;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+public class Sessionbuilder {
+	private static SessionFactory sessionFactory;
+
+    static {
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+}
+
+
+
+main class
+
+package com.daksh.hibernate_demo;
+
+import java.util.Scanner;
+import com.daksh.hibernate_demo.Studentservice;
+import com.daksh.hibernate_demo.entities.Student;
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("Select Options");
+			System.out.println("Option 1: Insert new student");
+			System.out.println("Option 2: Update student city");
+			System.out.println("Option 3: Get Student id");
+			System.out.println("Option 4: Delete Student by id");
+			
+			int n=sc.nextInt();
+			switch(n) {
+			case 1: {
+			    Student s1 = new Student();
+
+			    System.out.println("Enter name:");
+			    String a = sc.next();
+			    s1.setName(a);
+			    System.out.println("Enter city:");
+			    String c = sc.next();
+			    s1.setCity(c);
+			    sc.nextLine();
+			    System.out.println("Enter review:");
+			    String r = sc.nextLine();
+			    s1.setReview(r);
+
+			    Studentservice.insert(s1);
+			}break;
+			case 2:{
+				Student s2=new Student();
+				System.out.println("Enter id:");
+				int id=sc.nextInt();
+				System.out.println("Enter city:");
+				String str=sc.next();
+				s2.setCity(str);
+				Studentservice.update(id,s2);
+			}break;
+			case 3:{
+				System.out.println("Enter id:");
+				int id=sc.nextInt();
+				Studentservice.view(id);
+			}break;
+			case 4:{
+				System.out.println("Enter id:");
+				int id=sc.nextInt();
+				Studentservice.delete(id);
+			}break;
+			}
+		}
+    }
+}
+
+
+
+
+package com.daksh.hibernate_demo;
+
+import org.hibernate.*;
+import com.daksh.hibernate_demo.util.*;
+import com.daksh.hibernate_demo.entities.*;
+public class Studentservice {
+	static SessionFactory sessionfactory = Sessionbuilder.getSessionFactory();
+	static void insert(Student s1) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+        	session.persist(s1);
+        	transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void update(int id,Student s1) {
+		try(Session session =sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Student currstudent=session.get(Student.class,id);
+			if(currstudent!=null) {
+				currstudent.setCity(s1.getCity());
+			}
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void view(int id) {
+		try(Session session=sessionfactory.openSession()){
+			Student currstudent=session.get(Student.class,id);
+			if (currstudent != null) {
+	            System.out.println("Name   : " + currstudent.getName());
+	            System.out.println("City   : " + currstudent.getCity());
+	            System.out.println("Review : " + currstudent.getReview());
+	        } else {
+	            System.out.println("Student not found with id: " + id);
+	        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void delete(int id) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Student currstudent=session.get(Student.class,id);
+			if (currstudent != null) {
+	            session.remove(currstudent);
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+HQL - Hibernate Query Language, database independent. HQL -> NATIVE QUERY -> SQL
+
+
+
+	static void viewall() {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			String hql="FROM Student";
+			List<Student>list=session.createQuery(hql,Student.class).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("City   : " + s.getCity());
+	                System.out.println("Review : " + s.getReview());
+	                System.out.println("-------------------");
+	            });
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void viewallbycity(String city) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			String hql="FROM Student WHERE city = :city";
+			List<Student>list=session.createQuery(hql,Student.class).setParameter("city",city).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("City   : " + s.getCity());
+	                System.out.println("Review : " + s.getReview());
+	                System.out.println("-------------------");
+	            });
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+
+
+
+fetch and cascade types
+
+cascade types - if i delete student the all certificates of that student will also be deleted automatically. CascadeType.ALL
+
+fetch types - if i fetch student the all certificates of that student will also be fetched automatically or later.
+FetchType.EAGER - fetch all certificates of that student automatically.
+FetchType.LAZY - fetch all certificates of that student later when we call it.
+
+
+
+
+
+
+
+
+	static void viewallwithCriteria() {
+		try(Session session=sessionfactory.openSession()){
+			CriteriaBuilder cb=session.getCriteriaBuilder();
+			CriteriaQuery<Student>cq=cb.createQuery(Student.class);
+			Root<Student>root=cq.from(Student.class);
+			List<Student> list = session.createQuery(cq).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("City   : " + s.getCity());
+	                System.out.println("Review : " + s.getReview());
+	                System.out.println("-------------------");
+	            });
+	        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void pagination(int page, int pageSize) {
+		try(Session session = sessionfactory.openSession()){
+			List<Student>list=session.createQuery("FROM Student ORDER BY id", Student.class)
+	                          .setFirstResult((page - 1) * pageSize)
+	                          .setMaxResults(pageSize)
+	                          .getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+

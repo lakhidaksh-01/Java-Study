@@ -1,0 +1,430 @@
+JDBC = Java Database Connectivity
+
+ - It is a Java API that allows Java applications to connect to databases such as MySQL, PostgreSQL, Oracle, SQL Server, etc.
+
+ - Real company example
+
+    Suppose your company has an Employee Management System.
+    When a user clicks “Add Employee”:
+    Frontend sends data to backend.
+    Java backend receives employee data.
+    JDBC sends an SQL query to MySQL.
+    MySQL stores the employee record.
+
+Without JDBC, Java cannot communicate with the database.
+
+
+
+
+	
+
+
+Frontend - HTML / React
+Backend - Java
+Database - MySQL
+Connector - JDBC Driver
+
+
+Java Application <---> JDBC API <---> JDBC Driver Manager <---> JDBC Driver <---> Database (MySQL)
+
+
+Flow
+
+Java Application → your code.
+
+JDBC API → interfaces provided by Java (Connection, Statement, ResultSet etc.).
+
+DriverManager → finds the correct database driver.
+
+JDBC Driver → database-specific implementation (MySQL driver, PostgreSQL driver, Oracle driver).
+
+Database → executes SQL and returns data.
+
+
+
+
+
+
+
+
+
+
+JDBC API is a set of Java interfaces and classes provided by Java itself.
+
+
+| Important Name    | Class / Interface | Purpose                        |
+| ----------------- | ----------------- | ------------------------------ |
+| Connection        | Interface         | Represents database connection |
+| PreparedStatement | Interface         | Represents SQL command         |
+| ResultSet         | Interface         | Represents returned rows       |
+| SQLException      | Class             | Represents database errors     |
+| DriverManager     | Class             | Finds suitable driver          |
+
+### Note - All of these are built-in JDBC types provided by Java in the `java.sql` package.
+
+
+
+
+What is a JDBC Driver?
+
+A JDBC Driver is a software component that enables Java applications to communicate with a specific type of database. It implements the JDBC API and provides the necessary functionality to establish a connection with the database, execute SQL statements, and process results.
+
+
+
+
+
+steps to connect to a database using JDBC:
+
+1. Import packages
+
+import java.sql.*;
+
+
+2. Load driver
+
+Class.forName("com.mysql.cj.jdbc.Driver");      // Load the MySQL driver class into memory
+
+
+3. Register driver
+
+DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());    // If someone asks for a MySQL connection, call me.
+
+
+4. Create communication (Connection)  // 
+
+Connection con = DriverManager.getConnection(
+    "jdbc:mysql://LAPTOP-T69E4FDD:3306/company",
+    "root",
+    ""
+);
+
+// This is the first real communication with MySQL.
+
+
+5. Create statement
+
+PreparedStatement ps = con.prepareStatement(
+    "SELECT * FROM employee WHERE id = ?"
+);
+
+// You are preparing an SQL command that will be sent through the connection.
+
+
+
+6. Execute statement
+
+    ResultSet rs = ps.executeQuery();       // executing
+
+
+7. Close resources 
+
+    rs.close();
+    ps.close();
+    con.close();
+
+
+
+
+
+DriverManager is a class that manages a list of database drivers. It matches connection requests from Java applications with the appropriate driver using communication subprotocol.
+
+
+DriverManager -> Connection -> Statement -> ResultSet
+
+
+
+In JDBC, methods such as getConnection(), prepareStatement(), and executeQuery() internally create concrete implementation objects using new and return their references, which are stored in interface-type variables (Connection, PreparedStatement, ResultSet).
+
+
+
+Connection con = DriverManager.getConnection(url, user, password);
+
+DriverManager the class has a static method getConnection() which return `new JbdcConnection(url, user, password)` object. 
+JdbcConnection is a class that implements the Connection interface. 
+
+
+
+PreparedStatement ps = con.prepareStatement(sql);
+
+con.prepareStatement(sql); is abstract method in interface that is ovride in jdbc connection right
+same story as above
+
+
+ResultSet rs = ps.executeQuery();
+
+
+
+
+
+package com.daksh.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class MainApp {
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/company_db";
+        String user = "root";
+        String password = "DakshLakhi@123";
+
+        String sql = "SELECT * FROM employee";
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("EMPLOYEE LIST");
+            System.out.println("-------------------------------");
+
+            while (rs.next()) {
+
+                int id = rs.getInt("emp_id");
+                String name = rs.getString("emp_name");
+                String desig = rs.getString("designation");
+                double salary = rs.getDouble("salary");
+
+                System.out.println(id + " | " +name + " | " +desig + " | " +salary);
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+SQL statement
+
+	
+
+JDBC method
+
+SELECT - executeQuery()
+
+INSERT - executeUpdate()
+
+UPDATE - executeUpdate()
+
+DELETE - executeUpdate()
+
+CREATE TABLE - executeUpdate()
+
+ALTER TABLE - executeUpdate()
+
+DROP TABLE - executeUpdate()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Full working
+
+CREATE DATABASE IF NOT EXISTS students;
+USE students;
+
+CREATE TABLE students1 (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    city VARCHAR(50)
+);
+
+
+
+package demo;
+
+public class Student {
+
+    private int id;
+    private String name;
+    private String city;
+
+    public Student() {
+    }
+
+    public Student(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public Student(int id, String name, String city) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{id=" + id +
+               ", name='" + name + '\\'' +
+               ", city='" + city + '\\'' +
+               "}";
+    }
+}
+
+
+package demo;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    static String url = "jdbc:mysql://localhost:3306/students";
+    static String user = "root";
+    static String pass = "YOUR_PASSWORD";
+
+    public static void main(String[] args) {
+
+        // Create Java objects
+        Student s1 = new Student("Daksh", "Hisar");
+        Student s2 = new Student("Rahul", "Delhi");
+
+        // Store objects in database
+        saveStudent(s1);
+        saveStudent(s2);
+
+        // Read from database as objects
+        List<Student> students = getAllStudents();
+
+        // Use objects in Java
+        System.out.println("Students fetched from database:");
+
+        for (Student s : students) {
+            System.out.println(s);
+        }
+    }
+
+    // INSERT object into database
+    static void saveStudent(Student student) {
+
+        String sql =
+            "INSERT INTO students1(name, city) VALUES (?, ?)";
+
+        try (
+            Connection con =
+                DriverManager.getConnection(url, user, pass);
+
+            PreparedStatement ps =
+                con.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, student.getName());
+            ps.setString(2, student.getCity());
+
+            int rows = ps.executeUpdate();
+
+            System.out.println(rows + " student inserted");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // SELECT rows and convert to objects
+    static List<Student> getAllStudents() {
+
+        List<Student> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM students1";
+
+        try (
+            Connection con =
+                DriverManager.getConnection(url, user, pass);
+
+            PreparedStatement ps =
+                con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery()
+        ) {
+
+            while (rs.next()) {
+
+                // Create object from one row
+                Student s = new Student();
+
+                s.setId(rs.getInt("id"));
+                s.setName(rs.getString("name"));
+                s.setCity(rs.getString("city"));
+
+                list.add(s);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+}
+

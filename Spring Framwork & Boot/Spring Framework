@@ -1,0 +1,229 @@
+Spring is a Java framework that helps you build applications by managing objects, dependencies, web requests, database access, transactions, security, and configuration for you.
+
+
+What problems does Spring solve?
+
+1. Object Management (IoC Container Inversion of Control) - Spring creates and stores objects called beans. Benefit: No manual new everywhere.
+
+2. Dependency Injection - Spring automatically provides required dependencies. Benefit: Loose coupling and easier testing.
+
+3. Web Framework - Spring handles HTTP requests and responses. Benefit: Easy REST API development.
+
+4. Database Integration - Spring integrates with JDBC, Hibernate, and JPA. Benefit: Much less database boilerplate.
+
+5. Transaction Management - Spring ensures operations succeed together or fail together. Benefit: Data consistency.
+
+6. Security - Spring Security provides authentication and authorization. Benefit: Production-grade security.
+
+7. Validation - Spring validates incoming data automatically. Benefit: Cleaner APIs and safer input handling.
+
+8. Configuration Management - Different settings for development, testing, and production. Benefit: Easy deployment across environments.
+
+
+
+
+The three biggest reasons companies use Spring
+
+If you remember only three things, remember these.
+
+1 Productivity - Build APIs in hours instead of days.
+
+2 Maintainability - Large teams can work on cleanly separated layers.
+
+3 Ecosystem - Security, database, messaging, cloud, testing, monitoring, batch jobs, and more work together consistently.
+
+
+
+Spring ecosystem
+
+Spring Core - It provides the most basic and important features of Spring. IOC, Dependency Injection, Bean Managment, configuration, ApplicationContext.
+
+Spring MVC - used to build web applications and REST APIs. It uses Servlet technology internally but using it is easier.
+Spring Data - to connect to database. Spring Data JPA - hibenate ORM
+Spring Security - used for authentication and authorization
+Spring AOP - Spring AOP lets you separate cross-cutting concerns (logging, transactions, security, caching, auditing, etc.) from business logic by applying code around method execution.
+Spring AI - it helps java integrate AI features into spring application.
+
+
+
+Spring Boot - Automation Layer on top of sping that configures the spring so we could start building application quickly with auto configuration, starter dependencies , embedded servers, sensible defaults, production ready features.
+
+Maven is the build and dependency management tool for your Java/Spring Boot project.
+
+
+
+
+
+
+
+Spring core -> Spring container (heart of spring) = 1. manages beans objects
+                                                    2. mannages bean lifecycle
+                                                    3. Dependency Injection
+                                                    4. Aspect orianted programming
+                                                    5. Transaction Managment
+
+two ways to create it = 1. beanFactory (old)
+                        2. ApplicationContext (new)(interface)
+
+
+
+we will use ApplicationContext
+
+class -> configuration (xml file, java file , annotaions)-> main class applicationContext interface -> Access Objects
+
+Note add external dependencies jar files
+1. spring-beans-XXX.jar
+2. spring-core-XXX.jar
+3. spring-context-XXX.jar
+4. spring-expression-XXX.jar
+5. common-logging-XXX.jar
+
+
+
+
+
+
+
+
+
+package com.daksh.springprogram01;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.daksh.springprogram01.entities.*;
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	ApplicationContext context= new ClassPathXmlApplicationContext("ApplicationContext.xml");
+		Student std=context.getBean(Student.class);
+		std.print();
+    }
+}
+
+
+package com.daksh.springprogram01.entities;
+
+public class Student {
+	private String name;
+	private int age;
+	private String city;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public void print() {
+		System.out.print(name+" "+age+" "+city);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IOC and dependency
+
+package com.daksh.student_management;
+
+/**
+ * Hello world!
+ *
+ */
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+public class App 
+{
+	
+    public static void main( String[] args )
+    {
+        ApplicationContext context= new AnnotationConfigApplicationContext("com.daksh.student_management");
+        
+        System.out.println("Spring container started");
+        
+        StudentService service =
+                context.getBean(StudentService.class);
+
+        service.printMessage();
+
+    }
+}
+
+
+package com.daksh.student_management;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MessageService {
+	 public MessageService() {
+	     System.out.println("MessageService object created by Spring");
+	 }
+	 public String getMessage() {
+	     return "Hello Spring IoC";
+	 }
+}
+
+
+package com.daksh.student_management;
+
+import org.springframework.stereotype.Component;
+@Component
+public class StudentService {
+	private final MessageService messageservice;
+	public StudentService(MessageService messageservice) {
+		this.messageservice=messageservice;
+        System.out.println("StudentService created");
+	}
+	public void printMessage() {
+        System.out.println(messageservice.getMessage());
+    }
+}
+
+
+
+
+
+Spring mvc
+

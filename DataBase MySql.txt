@@ -1,0 +1,300 @@
+-- Step 1: Create a database
+CREATE DATABASE company_db;
+
+-- Step 2: Select that database
+USE company_db;
+
+-- Step 3: Create the employee table
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_name VARCHAR(50),
+    designation VARCHAR(50),
+    salary DECIMAL(10,2)
+);
+
+-- Step 4: Insert employee records
+INSERT INTO employee (emp_name, designation, salary)
+VALUES
+('Daksh', 'Software Engineer', 50000),
+('Riya', 'QA Engineer', 45000),
+('Aman', 'Backend Developer', 65000);
+
+-- Step 5: View all employee records
+SELECT * FROM employee;
+
+
+
+Host : LAPTOP-T69E4FDD
+Socket: MySQL
+Port : 3306
+
+
+
+
+
+
+
+SQL stands for Structured Query Language
+It is used to communicate with databases, enabling users to retrieve, insert, update, and delete data efficiently
+
+
+Database Management System (DBMS) 
+It is software that acts as an interface between users and databases, enabling the ability to define, create, and manage data efficiently.
+Purpose: It simplifies the process of interacting with complex database structures.
+
+
+Relational DatabaseA type of database that organizes data into tables (also called relations) consisting of rows and columns.
+Examples: Popular systems include MySQL, PostgreSQL, Oracle, SQL Server, and SQLite.
+
+
+CRUD Operations
+CRUD stands for Create, Read, Update, and Delete, which are the four basic operations performed on data in a database.
+
+
+SQL Queries
+SQL queries are used to perform various operations on the data stored in a database. They allow users to retrieve, manipulate, and manage data effectively.
+
+
+
+
+
+
+-- Create database
+CREATE DATABASE company_db;
+
+-- See all databases
+SHOW DATABASES;
+
+-- Enter the database
+USE company_db;
+
+-- See tables inside it
+SHOW TABLES;
+
+-- Delete the database
+DROP DATABASE company_db;
+
+
+
+-- Create a table
+
+CREATE TABLE Students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    course VARCHAR(50),
+    marks Double
+);
+
+Note : 
+
+id → column name
+INT → integer type
+PRIMARY KEY → unique for every row
+AUTO_INCREMENT → MySQL automatically generates 1,2,3…
+VARCHAR(100) -> text up to 100 characters
+DECIMAL(10,2) -> salary with 2 decimal places
+
+
+
+INSERT INTO STUDENTS(Name,Course,Marks) VALUES ("Daksh Lakhi","CSE",81.5); 
+
+UPDATE Students SET marks=79 WHERE Id=2;
+
+DELETE FROM STUDENTS WHERE Id=3;
+
+
+1. SELECT - selects columns and fetch data
+
+SELECT col1,col2 FROM table1
+
+example:
+
+SELECT name, salary FROM employees;
+SELECT * FROM employees;
+
+
+2. WHERE - Filter rows
+
+SELECT * FROM table1 WHERE condition;
+
+example: 
+SELECT * FROM employees WHERE salary > 50000;
+SELECT * FROM Students WHERE Marks > 80;
+
+
+3. ORDER BY - Sort results
+
+SELECT * FROM table1 ORDER BY col DESC;
+
+example:
+SELECT * FROM employees ORDER BY salary DESC;
+SELECT * FROM students ORDER BY MARKS ASC;
+
+
+4. GROUP BY (Aggregation) - Group rows
+
+SELECT column, COUNT(*) FROM table GROUP BY column;
+
+example: 
+SELECT department, COUNT(*) FROM employees GROUP BY department;
+SELECT course,COUNT(*) AS total_students FROM students GROUP BY course;
+
+
+5. HAVING - Filter grouped data
+
+SELECT column, COUNT(*) 
+FROM table 
+GROUP BY column 
+HAVING COUNT(*) > 2;
+
+example: SELECT department, COUNT(*) 
+         FROM employees 
+         GROUP BY department 
+         HAVING COUNT(*) > 5;
+
+SELECT course,COUNT(*) FROM students GROUP BY course HAVING COUNT(*) >3;
+
+
+
+6. AGGREGATE FUNCTIONS - Calculations
+
+example: SELECT AVG(salary) FROM employees;
+SELECT AVG(marks) FROM Students;
+
+
+7. JOINS
+
+INNER JOIN - Only matching rows
+
+SELECT * 
+FROM A INNER JOIN B 
+ON A.id = B.id;
+
+
+LEFT JOIN - All from left + match
+
+SELECT * 
+FROM A LEFT JOIN B 
+ON A.id = B.id;
+
+RIGHT JOIN - All from right + match
+
+SELECT * 
+FROM A RIGHT JOIN B 
+ON A.id = B.id;
+
+Full OUTER JOIN - All from both + match
+
+Select *
+From A FULL OUTER JOIN B
+on A.id=B.id;
+
+example: SELECT e.name, d.name
+         FROM employees e
+         LEFT JOIN departments d
+         ON e.dept_id = d.id;
+
+
+8. Subquery - Query inside query
+
+example : SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+9. DISTINCT (Remove duplicates)
+
+SELECT DISTINCT department FROM employees;
+example: SELECT Distinct NAME FROM students
+
+
+10. LIMIT (Restrict results)
+
+SELECT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+
+example : SELECT * FROM students ORDER BY marks DESC LIMIT 1 OFFSET 1
+
+
+11 Alias
+
+SELECT name AS student_name FROM students;
+
+12 Concatenation
+
+SELECT CONCAT(first_name, ' ', last_name) AS full_name
+FROM students;
+
+
+13 index
+
+CREATE INDEX idx_name ON students(name);
+
+
+11. ACID Properties
+Atomicity → all or nothing
+Consistency → valid data
+Isolation → no conflict
+Durability → permanent
+
+
+
+
+
+
+
+
+
+
+
+
+import java.sql.*;
+
+public class TransactionDemo {
+    public static void main(String[] args) throws Exception {
+
+        Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/testdb",
+            "root",
+            "password");
+
+        try {
+            con.setAutoCommit(false);
+
+            PreparedStatement debit = con.prepareStatement(
+                "UPDATE accounts SET balance = balance - 1000 WHERE id=?");
+            debit.setInt(1, 1);
+            debit.executeUpdate();
+
+            PreparedStatement credit = con.prepareStatement(
+                "UPDATE accounts SET balance = balance + 1000 WHERE id=?");
+            credit.setInt(1, 2);
+            credit.executeUpdate();
+
+            con.commit();
+            System.out.println("Transfer successful");
+
+        } catch (Exception e) {
+
+            con.rollback();
+            System.out.println("Transfer failed, changes reverted");
+        }
+
+        con.close();
+    }
+}
+
+
+
+
+SELECT NAME, COUNT(*) AS cnt
+FROM duplicates 
+Group by NAME 
+Having COUNT(*)>1;
+
+DELETE d1 
+FROM Duplicates AS d1 JOIN Duplicates AS d2
+ON d1.name=d2.name AND d1.id>d2.id;
+
+
+

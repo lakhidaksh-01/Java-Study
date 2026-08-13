@@ -1,0 +1,57 @@
+JVM = Java Virtual Machine
+
+The JVM is a software engine that runs Java programs. It acts as a layer between your Java code and the operating system.
+
+5 different types of memory areas in JVM are:
+
+Method Area: 
+1. Class structure and information
+2. methods
+3. static variables
+
+
+Heap Memory:
+1. Objects and instance variables, arrays.
+
+Stack Memory:
+1. Local variables
+2. Method calls
+
+
+Program Counter (PC) Register: 
+1. Keeps track of the address of the currently executing instruction.
+
+
+Native Method Stack:
+1. Contains all the native methods used in the application.
+
+
+
+
+
+string constant pool:That special storage area is called the String Constant Pool. that only contains string literals. 
+
+if String a="Java", b="Java", then both a and b refer to same object saved in String Constant pool.
+
+
+flow goes like this:
+
+stack memory (stores references of objects)-> Heap Memory (stores actual objects) -> String Constant Pool (stores string literals)
+
+
+
+
+
+
+
+
+
+
+String str = "Daksh";
+
+Stack(str) -> string constant pool ("Daksh")
+
+
+String str1 = new String("Daksh");
+
+Stack(str1) -> Heap Memory (new String("Daksh")) -> string constant pool ("Daksh")

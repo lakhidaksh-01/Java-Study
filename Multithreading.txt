@@ -1,0 +1,108 @@
+Multithreading = executing multiple tasks (threads) at the same time within a program.
+
+Imagine your company’s backend server receives 1,000 API requests at the same time.
+If Java handled them one by one, users would wait forever.
+So Java creates multiple threads to work simultaneously.
+
+
+Real company example
+
+User A → Login API
+User B → View Products API
+User C → Payment API
+User D → Chat Message API
+
+Each request is usually processed by a separate thread.
+
+One line definition: A thread is the smallest unit of execution inside a Java program.
+
+
+
+
+There are two ways to Multithreading
+
+
+1. extends Thread class (built-in class to create a thread)
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Task running in: " + Thread.currentThread().getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start(); // creates new thread
+        t1.run(); // runs in main thread
+    }
+}
+
+
+some in built functions of thread class you must rebember
+
+t.start(); // starts a new thread
+
+A user uploads a file to your web application. You immediately return “Upload started” and process the file in a background thread so the UI does not freeze.
+
+
+
+t.run() // actually it is a in-built but empty function that you can to override to give work or it will end automatically.
+
+Send a welcome email after user registration without blocking the registration API. call start(), not run() directly, if you want a separate thread.
+
+
+
+Thread.sleep(milliseconds); // pauses the current thread for a specified time. Useful for simulating delays or waiting for resources.
+
+for (int i = 1; i <= 3; i++) {
+    try {
+        callPaymentApi();
+        break;
+    } catch (Exception e) {
+        Thread.sleep(2000); // wait before retry
+    }
+}
+
+Retry a failed payment API after waiting 2 seconds
+
+
+
+
+t1.join() // wait until the thread t1 completes its execution before proceeding. Useful for synchronizing threads.
+
+Generate a PDF invoice in a background thread, then email it only after generation is complete.
+
+
+
+Thread.currentThread() // who am I?
+Thread.currentThread().getName() // get the name of the thread
+
+t1.setName("PaymentThread"); // set the name of the thread
+t1.isAlive() // check if the thread is still running
+t1.interrupt(); // interrupt a thread that is in a waiting or sleeping state. Useful for stopping long-running tasks gracefully.\
+t1.setPriority(Thread.MAX_PRIORITY); // set the priority of the thread. Higher priority threads are scheduled before lower priority ones.
+
+
+
+2. implements Runnable interface (more flexible way to create a thread because A class may already extend another class, so extending Thread is limiting.)
+
+
+// Nothing new just
+1. extends Thread -> implement Runnable
+2. Thread t1=new Thread(task); -> add this line
+
+class myThread implements Runnable{
+    public void run(){
+        System.out.println("thread is created and running on:"+ Thread.currentThread().getName());
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        myThread task=new myThread();
+        Thread t1=new Thread(task);
+        t1.start();
+        t1.run();
+        
+    }
+}

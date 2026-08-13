@@ -1,0 +1,133 @@
+Lambda - Short implementation of a functional interface
+
+Functional Interface - Interface with one abstract method
+
+Stream - Pipeline for collection processing
+
+
+
+interface PaymentProcessor {
+    void process(double amount);
+}
+
+
+
+without lambda expression
+
+class RazorpayProcessor implements PaymentProcessor {
+    public void process(double amount) {
+        System.out.println("Processing ₹" + amount);
+    }
+}
+
+PaymentProcessor p = new RazorpayProcessor();
+
+
+
+with lambda expression 
+
+PaymentProcessor p = (amount) -> System.out.println("Processing ₹" + amount);
+
+
+
+
+example
+
+interface Calculator {
+    int add(int a, int b);
+}
+
+Calculator c = (a, b) -> a + b;
+
+System.out.println(c.add(5, 3));
+
+
+
+
+
+Stream API - A stream processes collections in a pipeline.
+
+List<Integer> nums = Arrays.asList(1,2,3,4,5,6);
+
+List<Integer> even = nums.stream()
+                         .filter(n -> n % 2 == 0)
+                         .toList();
+
+System.out.println(even); // [2, 4, 6]
+
+
+
+List<String> names = Arrays.asList("daksh", "rahul");
+
+List<String> upper = names.stream()
+                          .map(String::toUpperCase)
+                          .toList();
+
+System.out.println(upper); // [DAKSH, RAHUL]
+
+
+
+
+Method Reference - A method reference is a shorthand notation of a lambda expression to call a method.
+
+(n->n.toUpperCase()) can be replaced with String::toUpperCase
+(n->System.out.println(n)) can be replaced with System.out::println
+
+
+
+
+optional - A container object which may or may not contain a non-null value. It is used to avoid null checks and NullPointerExceptions.
+
+| Method                     | Meaning                                           |
+| -------------------------- | ------------------------------------------------- |
+| Optional.of(value)         | Value must NOT be null                            |
+| Optional.ofNullable(value) | Value may be null                                 |
+| orElse(default)            | Return value if present, otherwise return default |
+
+Optional<String>name=Optional.ofNullable(null);
+System.out.println(name.orElse("daksh"));
+
+
+
+
+Predicate = test
+
+import java.util.function.Predicate;
+class Main {
+    public static void main(String[] args) {
+        Predicate<Integer>test=n->n%2==0;
+        System.out.print(test.test(18));
+    }
+}
+
+
+
+supplier = get
+
+import java.util.function.*;
+class Main {
+    public static void main(String[] args) {
+        Supplier<String> otp = () -> "123456";
+      System.out.println(otp.get());
+    }
+}
+
+
+
+Function<T,R> — apply
+
+Function<String, Integer> length = s -> s.length();
+
+System.out.println(length.apply("Daksh")); // 5
+Understand the types
+
+T = String (input)
+R = Integer (result)
+
+
+
+Consumer<T> — Use
+
+Consumer<String> greet = name -> System.out.println("Hello " + name);
+
+greet.accept("Daksh");

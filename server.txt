@@ -1,0 +1,14 @@
+import com.sun.net.httpserver.HttpServer;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+
+
+
+There is a in built HTTP server in Java 8 which can be used to create a simple HTTP server. It is part of the com.sun.net.httpserver package.
+it help to create simple api to connect with front end.
+
+some of the terms:
+
+HttpServer - It is a abstract class which is used to create a simple HTTP server.
+InetSocketAddress - It is a class which is used to create a socket address.(port, host).
+OutputStream - It is a class which is used to write the response to the client.

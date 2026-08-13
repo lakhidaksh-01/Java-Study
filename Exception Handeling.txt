@@ -1,0 +1,121 @@
+Exception Handling
+- checked exceptions: These are exceptions that are checked at compile time. External system problems. Examples include IOException, SQLException, etc.
+- unchecked exceptions: These are exceptions that are not checked at compile time. They occur due to programming errors. Examples include NullPointerException, ArrayIndexOutOfBoundsException, ArithmeticException.
+
+ Example  int a = 10 / 0; // ArithmeticException
+
+ Why companies use it
+
+* Prevent application crashes
+* Show proper error messages
+* Keep APIs and services running
+* Clean up resources safely
+
+
+# 1. try, catch, finally
+
+ Syntax
+
+try {
+    int a = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero");
+} finally {
+    System.out.println("Cleanup code");
+}
+
+
+Meaning
+
+| Block     | Purpose           |
+| --------- | ----------------- |
+| try       | Risky code        |
+| catch     | Handle exception  |
+| finally   | always executes/ can use instead of catch |
+| throw     | Manually throw exception and declare |
+| throws    | maybe can throw exception |
+
+
+
+## Important points
+
+* Multiple catch blocks are allowed.
+* `finally` usually executes even when an exception occurs.
+
+
+
+import java.io.*;
+
+class Demo {
+
+    static void readFile() throws FileNotFoundException {
+        FileReader fr = new FileReader("a.txt");
+        System.out.println("File opened");
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            readFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+}
+
+
+
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class Main {
+    static void registerUser(int age) throws Exception{
+        if(age<18){
+            throw new Exception("below 18");
+        }else{
+            System.out.println("Registered");
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int age=sc.nextInt();
+        try{
+            registerUser(age);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    static int divide(int a, int b){
+        int c=0;
+        try{
+           c=a/b;
+        }catch(ArithmeticException e){
+            System.out.println("exception");
+        }finally{
+            System.out.println("run");
+        }
+        return c;
+    }
+    public static void main(String[] args) {
+        divide(10,0);
+    }
+}
+
+
+
+
+try-with-resources
+
+try (FileInputStream fis = new FileInputStream("data.txt")) {
+    System.out.println(fis.read());
+} catch (IOException e) {
+    e.printStackTrace();
+}

@@ -1,0 +1,87 @@
+ObjectMapper (Jackson) — Quick Notes
+
+What is it?
+
+ObjectMapper is a Jackson class used to convert **Java objects ↔ JSON**.
+
+Java → JSON = Serialization
+JSON → Java = Deserialization
+
+---
+
+Create mapper
+
+java
+ObjectMapper mapper = new ObjectMapper();
+
+
+---
+
+ Object → JSON
+
+
+String json = mapper.writeValueAsString(obj);
+
+
+Example output:
+
+json
+{"color":"red","size":"small"}
+
+
+---
+
+## JSON → Object
+
+Hat hat = mapper.readValue(json, Hat.class);
+
+---
+
+Array/List → JSON
+
+String json = mapper.writeValueAsString(arr);
+
+Output:
+
+[
+  {"color":"red","size":"small"},
+  {"color":"blue","size":"large"}
+]
+
+---
+
+## Pretty print JSON
+
+String json = mapper
+    .writerWithDefaultPrettyPrinter()
+    .writeValueAsString(obj);
+
+---
+
+## Requirements
+
+Getters for serialization
+No-arg constructor usually needed for deserialization
+
+---
+
+## Most used methods
+
+| Method                             | Purpose              |
+| ---------------------------------- | -------------------- |
+| `writeValueAsString(obj)`          | Object → JSON string |
+| `readValue(json, Class)`           | JSON → Object        |
+| `writerWithDefaultPrettyPrinter()` | Formatted JSON       |
+| `writeValue(file, obj)`            | Write JSON to file   |
+
+---
+
+## Spring Boot
+
+Spring Boot uses Jackson internally, so returning a Java object from a controller is automatically converted to JSON.
+
+---
+
+## One-line interview answer
+
+**ObjectMapper is Jackson’s core class that serializes Java objects to JSON and deserializes JSON back into Java objects.**

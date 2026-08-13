@@ -1,0 +1,20 @@
+import com.sun.net.httpserver.HttpServer;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+
+public class ServerApp {
+
+    public static void main(String[] args) throws Exception {
+
+       HttpServer server=HttpServer.create(new InetSocketAddress(7000),0);
+       server.createContext("/home",exchange->{
+            String res="home page";
+            exchange.sendResponseHeaders(200,res.length());
+            OutputStream os=exchange.getResponseBody();
+            os.write(res.getBytes());
+            os.close();
+       });
+       server.start();
+       System.out.print("server started");
+    }
+}

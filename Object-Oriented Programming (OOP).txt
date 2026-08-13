@@ -1,0 +1,274 @@
+# Packages= folder for classes and interfaces
+Type 1. Built-in packages: Java provides a set of built-in packages that contain pre-defined classes and interfaces. For example, java.util, java.io, java.net, etc.
+Type 2. User-defined packages: You can create your own packages to organize your classes and interfaces. This helps in avoiding naming conflicts and makes the code more modular and maintainable.
+
+to make a package
+step 1. myabcpack/myclass.java and write package myabcpack; at the top of the file.
+step 2. in main file import myabcpack.myclass; to use the class from the package.
+
+
+              same class | child class | non-child class same package | child class different package | non-child class different package
+public        yes           yes           yes                           yes                             yes
+
+protected     yes           yes           yes                           yes                             no
+
+default       yes           yes           yes                           no                              no
+
+private       yes           no            no                            no                              no
+
+
+
+
+this - Refers to current object.
+
+this.id=id;
+
+
+super - Refers to parent class.
+
+super();
+
+
+Rules for OOPs:
+
+1. When you create a object of a child class, java automatically call the constructor of parent class first and then the constructor of child class. This is called constructor chaining.
+2. Intialization block:
+     - intialization block contains the code in class which is executed every time when an object of the class is created. It is used to initialize the instance variables of the class.
+     {
+        System.out.println("object created");
+     }
+     - static Intialization block contains the code in class which is executed only once when the object is created. second time does not run.it is used to initialize the static variables of the class.
+     static{
+        System.out.println("object1 created");
+     }
+
+
+shallow copy - when you create a new object and assign it to another object, both objects will point to the same memory location. If you change the value of one object, the other object will also be affected.
+
+
+deep copy - when you create a new object and copy the values of the original object to the new object, both objects will point to different memory locations. If you change the value of one object, the other object will not be affected.
+
+
+
+
+
+
+
+PolyMorphism
+
+Poly = many
+Morphism = forms
+
+Think about a payment button in an app.
+
+The button says Pay, but users can pay by: UPI,Card, Net Banking
+
+Same action (pay()) → different behavior.
+
+That is polymorphism.
+
+
+
+1. Compile-time Polymorphism (Method Overloading)
+
+Same method name, different parameters.
+
+class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+
+2. Run-time Polymorphism (Method Overriding)
+
+Same method name, same parameters, different implementation in child class.
+
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Cat meows");
+    }
+}
+
+Rules for run-time polymorphism in Java:
+
+Animal obj=new Dog();
+obj.makeSound(); 
+
+1. if Both parent and child class have same method, then child class method will be called.
+2. Parent has method, Child does NOT override it - Parent method will be called.
+3. Parent does NOT have method, Child has method - Compile-time error.
+
+
+
+
+
+Abstraction - the process of hiding the implementation details and showing only the functionality to the user. In Java, abstraction is achieved using abstract classes and interfaces.
+
+- if a class has even one abstract method, the class must be declared abstract.
+- to hide the implementations we make objects directly from abstract class.
+- subclasses must override the abstract methods or else they will also be declared abstract.
+
+abstract class can contains
+ - abstract methods (methods without body)
+ - concrete methods (methods with body)
+ - instance variables
+ - constructors
+
+abstract class Shape {
+    abstract void draw(); // abstract method
+    void display() { // concrete method
+        System.out.println("Displaying shape");
+    }
+}
+class Circle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing circle");
+    }
+}
+
+
+
+Interfaces - An interface is used to show only what an object can do (methods) and hide how it does it, it is a way to achieve abstraction. 
+
+- all the methods of interface are abstract by default.
+- a class implements it must ovride the methods of interface.
+
+
+interface Drawable {
+    void draw(); // abstract method
+}
+class Circle implements Drawable {
+    @Override
+    public void draw() {                            // must be public because interface methods are public by default
+        System.out.println("Drawing circle");
+    }
+}
+
+Interface can contains
+ - methods (abstract by default)
+ - variables (public, static and final by default)
+
+
+interface Animal {
+    void sound();
+}
+
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Bark");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog(); // interface reference to class object
+        a.sound();
+    }
+}
+
+
+
+
+
+
+ Encapsulation - Encapsulation means keeping data private and allowing access to it only through methods.
+
+| Abstraction       | Encapsulation             |
+| ----------------- | ------------------------- |
+| Hide how it works | Hide the data             |
+| Focus on behavior | Focus on security/control |
+
+
+
+
+
+
+Association means a relationship between two separate classes or objects.
+
+1. One-to-One
+Person p;
+Passport pass;
+
+2. One-to-Many
+class Department {
+    List<Employee> employees;
+}
+
+3. Many-to-Many
+Student {
+    List<Course> courses;
+}
+
+Course {
+    List<Student> students;
+}
+
+
+
+
+
+
+class College {
+    String name = "ABC College";
+}
+
+class Student {
+    College college;   // association
+
+    Student(College college) {
+        this.college = college;
+    }
+
+    void show() {
+        System.out.println(college.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        College c = new College();
+        Student s = new Student(c);
+
+        s.show();
+    }
+}
+
+
+Note - Diamond problem is the ambiguity that occurs when a class inherits the same method from two parent classes; Java avoids it by not supporting multiple inheritance of classes.
+
+Java is not fully object-oriented because it supports primitive data types such as int, char, and boolean, which are not objects.
+
+
+
+
+
+
+
+
+class MathDemo {
+    static int square(int x) {
+        return x * x;
+    }
+}
+
+int y = MathDemo.square(5); // ✅ no object required

@@ -1,0 +1,304 @@
+| **List**   | **Set**       | **Queue**          | **Map**   |
+| ---------- | ------------- | ------------------ | --------- |
+| ArrayList  | HashSet       | LinkedList (Queue) | HashMap   |
+| LinkedList | LinkedHashSet | PriorityQueue      | Hashtable |
+| Vector     | TreeSet       | ArrayDeque (Deque) | TreeMap   |
+
+
+
+
+
+
+
+
+List = an ordered collection that allows duplicates and stores items by index (0,1,2...).
+
+1. ArrayList - Java keeps elements in contiguous memory, so accessing by index is very fast.
+
+List<String> products = new ArrayList<>();
+
+
+products.add("x")  // Add item
+
+products.get(i) // Read item by index
+
+products.set(i,"x") // Update item
+
+products.remove(i) // Delete by index
+
+products.remove("x") // Delete by value
+
+products.contains("x")  //Check exists
+
+products.size() // Total items
+
+products.isEmpty() //Check empty
+
+products.clear() // Remove all
+
+
+ArrayList<String> list = list2; // shallow copy
+ArrayList<String> list = new ArrayList<>(list2); // deep copy
+
+
+
+2. LinkedList - Each item points to the next item.
+
+List<String> task = new LinkedList<>();
+
+same as ArrayList but with better performance for add and remove operations in the middle of the list.
+
+task.addFirst(x)  //Add front
+task.addLast(x)  //Add end
+task.removeFirst()  //Remove front
+task.removeLast()  //Remove end
+task.getFirst()  //Read front
+task.getLast()  //Read end
+task.offer(x) // Add queue item
+task.poll()  //Remove queue item
+task.peek()  //See front item
+
+
+
+
+3. Vector - Vector is a synchronized (thread-safe) ArrayList from older Java versions.
+
+Vector<String> v = new Vector<>();
+v.add("A");
+
+Same methods as ArrayList.
+
+In muilti threading, suppose threads add two values at same index, then one will be lost but in vector, it will be synchronized and one will wait for the other to finish.
+
+
+
+
+
+
+Set = a collection that stores only unique values (no duplicates). Values not stored by index
+
+1. HashSet - Fastest Set for uniqueness; order is not guaranteed.
+
+Set<String> set = new HashSet<>();
+
+add()
+remove()
+contains()
+size()
+
+
+2. LinkedHashSet - Unique values + keeps insertion order.
+
+LinkedHashSet<String> tags = new LinkedHashSet<>();
+
+tags.add("Java");
+tags.add("Spring");
+tags.add("Java");
+
+System.out.println(tags); // [Java, Spring]
+
+
+
+3. TreeSet - Unique values + keeps sorted order automatically.
+
+TreeSet<Integer> scores = new TreeSet<>();
+
+add(x) //Add item
+
+contains(x) // Check item
+
+remove(x) // Delete item
+
+first() // Smallest value
+
+last() // Largest value
+
+higher(x) // Next greater value
+
+lower(x) // Next smaller value
+
+size() // Count items
+
+
+
+
+
+
+Queue = FIFO (First In, First Out) — the item added first is removed first.
+
+
+1. LinkedList - is the most common implementation of Queue in Java. only diffrence between list and queue LinkedList is in list we can add and remove from both ends but in queue we can only add from end and remove from front.
+
+Queue<String> q = new LinkedList<>();
+q.add("A");
+q.poll();
+q.peek();
+
+
+
+2. ArrayDeque
+
+Deque<String> deque = new ArrayDeque<>();
+
+Here’s the short interview-friendly table:
+
+| Method        | Purpose      |
+| ------------- | ------------ |
+| addFirst(x)   | Add at front |
+| addLast(x)    | Add at back  |
+| removeFirst() | Remove front |
+| removeLast()  | Remove back  |
+| peekFirst()   | View front   |
+| peekLast()    | View back    |
+
+Memory trick: Add → Remove → Peek from First or Last.
+
+
+3. PriorityQueue - Queue that removes the highest-priority (smallest by default) element first.
+
+Queue<String> queue = new PriorityQueue<>();
+
+
+
+Map = a collection that stores key-value pairs. Each key is unique, but values can be duplicated. Keys are used to retrieve values.
+
+1. HashMap = a collection that stores key-value pairs. Each key is unique, but values can be duplicated. Keys are used to retrieve values.
+HashMap<String, Integer> map = new HashMap<>();
+
+map.put("A", 1); // Add key-value pair
+map.get("A"); // Get value by key
+map.remove("A"); // Remove key-value pair
+map.containsKey("A"); // Check if key exists
+map.containsValue(1); // Check if value exists
+map.size(); // Count key-value pairs
+map.getOrDefault(map.get("A"), 0)+1; // frequency increase
+
+
+
+2. LinkedHashMap = a HashMap that maintains insertion order.
+
+LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
+
+3. TreeMap = a Map that keeps keys sorted automatically.
+
+TreeMap<String, Integer> map = new TreeMap<>();
+
+
+
+
+
+
+
+Iterator - An object that allows you to traverse through the elements of a collection.
+
+Iterator<String> it = list.iterator();
+while(it.hasNext()) {
+    String value = it.next();
+    System.out.println(value);
+}
+
+3 functions of Iterator:
+1. hasNext() - returns true if there are more elements to iterate.
+2. next() - returns the next element in the iteration.
+3. iterator() - returns an iterator over the elements in the collection.
+
+
+
+
+
+Generic Collections - decide type while calling the function or making object of class.
+
+class Box<T> {
+    T value;
+
+    void set(T value) {
+        this.value = value;
+    }
+
+    T get() {
+        return value;
+    }
+}
+Box<String> box = new Box<>(); // send String
+box.set("Hello");
+
+System.out.println(box.get());
+
+
+
+public static <T> void print(T value) {
+    System.out.println(value);
+}
+print("Java"); // T = String
+print(10);     // T = Integer
+
+
+
+
+Comparable and comparator - used to sort objects in a collection.
+
+why do we need them? - because we can sort a list or and array with numbers or string but we can't sort objects with multiple (even one also) properties and when we need to sort on bases of one property of objects.
+
+both are inbuilt interfaces tht we extend in our class and implement the compareTo() method of Comparable and compare() method of Comparator.
+
+comparator - compare two objects 
+comparable - compare current object with another object
+
+
+example of comparable:
+
+class Employee implements Comparable<Employee> {
+    int id;
+    String name;
+
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public int compareTo(Employee other) {
+        return this.id - other.id; // default sorting by ID
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + name;
+    }
+}
+
+List<Employee> list = new ArrayList<>();
+list.add(new Employee(103, "Daksh"));
+list.add(new Employee(101, "Aman"));
+list.add(new Employee(102, "Rohit"));
+
+Collections.sort(list);
+
+System.out.println(list);
+
+
+
+
+example of comparator:
+
+class EmployeeIdComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        return Integer.compare(e1.id, e2.id);
+    }
+}
+
+List<Employee> list = new ArrayList<>();
+list.add(new Employee(103, "Daksh"));
+list.add(new Employee(101, "Aman"));
+list.add(new Employee(102, "Rohit"));
+
+Collections.sort(list, new EmployeeIdComparator());
+
+System.out.println(list);
+
+
+
+
+Note - You do NOT call compareTo() or compare() directly because Collections.sort() calls them internally.
