@@ -1,0 +1,185 @@
+Dependence Injection - It is a deign pattern. its main task is to inject the dependency means inject one object to another.
+it is used to achive loose coupling in java
+we can achive DI by 2 ways
+ - Setter method Id
+ - Constructor Id
+
+
+ 1. setter
+
+ package com.daksh.springprogram03;
+
+/**
+ * Hello world!
+ *
+ */
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.daksh.springprogram03.entities.*;
+public class App 
+{
+    public static void main( String[] args )
+    {
+        ApplicationContext context=new ClassPathXmlApplicationContext("ApplicationContext.xml");
+        Restaurant r = context.getBean(Restaurant.class);
+        r.print();
+    }
+}
+
+package com.daksh.springprogram03.entities;
+
+public class Restaurant {
+	private Cheif cheif;
+	public void setCheif(Cheif cheif) {
+		this.cheif=cheif;
+	}
+	public void print() {
+		cheif.cook();
+	}
+}
+
+package com.daksh.springprogram03.entities;
+
+public class Cheif {
+	public void cook() {
+        System.out.println("Chef is cooking");
+    }
+}
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cheif" class="com.daksh.springprogram03.entities.Cheif"/>
+
+    <bean id="restaurant" class="com.daksh.springprogram03.entities.Restaurant">
+        <property name="cheif" ref="cheif"/>
+    </bean>
+
+</beans>
+
+
+
+
+2. constructor
+
+package com.daksh.springprogram03.entities;
+
+public class Restaurant {
+	private Cheif cheif;
+	public Restaurant(Cheif cheif) {
+		this.cheif=cheif;
+	}
+	public void print() {
+		cheif.cook();
+	}
+}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cheif" class="com.daksh.springprogram03.entities.Cheif"/>
+
+    <bean id="restaurant" class="com.daksh.springprogram03.entities.Restaurant">
+        <constructor-arg ref="cheif"/>
+    </bean>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+for java
+
+
+package com.daksh.springprogram03.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.daksh.springprogram03.entities.Cheif;
+import com.daksh.springprogram03.entities.Restaurant;
+
+@Configuration
+public class SpringConfig {
+
+    @Bean
+    public Cheif cheif() {
+        Cheif ch = new Cheif();
+        return ch;
+    }
+
+    @Bean
+    public Restaurant restaurant() {
+
+        // Constructor Injection
+        Restaurant res = new Restaurant(cheif());
+
+        return res;
+    }
+}
+
+
+package com.daksh.springprogram03;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.daksh.springprogram03.config.SpringConfig;
+import com.daksh.springprogram03.entities.Restaurant;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext(SpringConfig.class);
+
+        Restaurant r = context.getBean(Restaurant.class);
+
+        r.print();
+    }
+}
+
+
+
+
+suppose not properties are given in configuration file for name and value. and is single object no matter even if it is set values through set method that object will be passed but in case of prototype Spring creates a new object every time the bean is requested or injected. If no properties or constructor values are configured, each new object will contain Java default values (null, 0, false, etc.).”
+
+
+
+
+
+LifeCycle Spring Bean
+
+loading of bean definations from xml/javaConfig/Annotations -> Bean instantiation/Bean Object created -> Bean initialization/bean object is initialized with properties we set or set functions -> Bean Destruction/Object destroyed or deleted
+
+Bean destruction = Spring is shutting down and is finished with a bean.
+What is @PreDestroy?
+
+@PreDestroy
+public void cleanup() {
+    System.out.println("Bean is being destroyed");
+}
+
+Spring calls this method before destroying the bean.

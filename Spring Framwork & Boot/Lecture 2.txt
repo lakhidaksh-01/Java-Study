@@ -1,0 +1,65 @@
+Ioc with java class configuration
+
+
+package com.daksh.springprogram01.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.*;
+import com.daksh.springprogram01.entities.*;
+@Configuration
+public class AppConfig {
+	@Bean
+    @Scope("prototype")
+	public Student student() {
+		Student st=new Student();
+		return st;
+	}
+}
+
+
+ApplicationContext context2=new AnnotationConfigApplicationContext(AppConfig.class);
+Student std2=(Student)context2.getBean("student");
+std2.setName("kamal");
+std2.setAge(19);
+std2.setCity("New York");
+std2.print();
+
+
+
+Anotations studied - 1 Configuration , 2 Bean
+
+
+
+
+
+
+
+you can use notations just add a @Component above the class (can add this also @Scope("prototype") )
+
+if xml configuration add this
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         https://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.daksh.springprogram02"/>
+
+</beans>
+
+
+if java class then 
+
+package com.daksh.springprogram02.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.daksh.springprogram02")
+public class AppConfig {
+}

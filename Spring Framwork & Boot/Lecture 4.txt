@@ -1,0 +1,114 @@
+Autowiring - It is feature of spring framework by which we can achive "DI Automatically".
+
+It Autowiring can be achived = 1. Annotations Based Autowiring -> @Autowired
+                               2. XML Based Autowiring -> "autowire" attribute -> modes
+
+
+package com.daksh.springprogram04;
+
+/**
+ * Hello world!
+ *
+ */
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.daksh.springprogram04.config.SpringConfig;
+import com.daksh.springprogram04.entities.*;
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+        Restaurant r = context.getBean(Restaurant.class);
+        r.setName("punabi dhaba ");
+        Chef ch=context.getBean(Chef.class);
+        ch.setName("daksh");
+        ch.setExperience(2);
+        r.print();
+    }
+}
+
+
+package com.daksh.springprogram04.config;
+import com.daksh.springprogram04.entities.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configuration
+public class SpringConfig {
+	@Bean
+	public Chef chef() {
+		Chef ch=new Chef();
+		return ch;
+	}
+	@Bean
+	public Restaurant res() {
+		Restaurant res=new Restaurant();
+		return res;
+	}
+}
+
+
+
+package com.daksh.springprogram04.entities;
+
+public class Chef {
+	private String name;
+	private int experience;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getExperience() {
+		return experience;
+	}
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+	public void display() {
+		System.out.print("name is "+name+"and experience of yrs "+experience);
+	}
+}
+
+
+
+package com.daksh.springprogram04.entities;
+import org.springframework.beans.factory.annotation.Autowired;
+public class Restaurant {
+	private String name;
+	@Autowired
+	private Chef chef;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Chef getChef() {
+		return chef;
+	}
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+	public void print() {
+		System.out.print("Name: "+name+" Chef: ");
+		chef.display();
+	}
+}
+
+
+use qualifiers for telling specific if there are two beans chef1 and chef2 then in entity
+
+@Autowired
+@Qualifier("chef1")
+private Chef chef;
+
+
+
+
+
+
+

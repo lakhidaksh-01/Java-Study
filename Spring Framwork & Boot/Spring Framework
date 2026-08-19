@@ -57,7 +57,7 @@ Maven is the build and dependency management tool for your Java/Spring Boot proj
 
 
 Spring core -> Spring container (heart of spring) = 1. manages beans objects
-                                                    2. mannages bean lifecycle
+                                                    2. manages bean lifecycle
                                                     3. Dependency Injection
                                                     4. Aspect orianted programming
                                                     5. Transaction Managment
@@ -137,6 +137,19 @@ public class Student {
 
 
 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean class="com.daksh.springprogram01.entities.Student" id="stdid">
+    <property name="name" value="daksh"></property>
+    <property name="age" value="21"></property>
+    <property name="city" value="mohali"></property>
+    </bean>
+</beans>
 
 
 
@@ -144,86 +157,7 @@ public class Student {
 
 
 
+Note - suppose you have 10 students for diffrent objects you have to create 10 diffrent beans in configuration t create a object of unique student. but you can just create 100 of diffrent object for 100 diffrent students with one configuration line difrence scope="prototype".
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-IOC and dependency
-
-package com.daksh.student_management;
-
-/**
- * Hello world!
- *
- */
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-public class App 
-{
-	
-    public static void main( String[] args )
-    {
-        ApplicationContext context= new AnnotationConfigApplicationContext("com.daksh.student_management");
-        
-        System.out.println("Spring container started");
-        
-        StudentService service =
-                context.getBean(StudentService.class);
-
-        service.printMessage();
-
-    }
-}
-
-
-package com.daksh.student_management;
-import org.springframework.stereotype.Component;
-
-@Component
-public class MessageService {
-	 public MessageService() {
-	     System.out.println("MessageService object created by Spring");
-	 }
-	 public String getMessage() {
-	     return "Hello Spring IoC";
-	 }
-}
-
-
-package com.daksh.student_management;
-
-import org.springframework.stereotype.Component;
-@Component
-public class StudentService {
-	private final MessageService messageservice;
-	public StudentService(MessageService messageservice) {
-		this.messageservice=messageservice;
-        System.out.println("StudentService created");
-	}
-	public void printMessage() {
-        System.out.println(messageservice.getMessage());
-    }
-}
-
-
-
-
-
-Spring mvc
+if just make a single bean create 10 variables with scope="prototype" then 10 variables are just a shared object .A shared object is a single object instance that is referenced by multiple variables or multiple parts of the application.
 
