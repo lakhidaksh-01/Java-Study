@@ -1,0 +1,5 @@
+package com.daksh.hibernate_demo.util;
+
+public class Seesionbuilder {
+
+}

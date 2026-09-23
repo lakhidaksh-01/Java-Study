@@ -1,0 +1,16 @@
+package com.daksh.curd_application.entities;
+import jakarta.persistence.*;
+@Entity
+@Table(name="product")
+public class Product {
+	@Id
+	private int id;
+	@Column
+	private String name;
+	private double price;
+	private int stockQuantity;
+	@OneToMany(mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+	private OrderItem order;
+}

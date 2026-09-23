@@ -1,0 +1,5 @@
+package com.daksh.Student.entities;
+
+public class Student {
+
+}

@@ -1,0 +1,136 @@
+package com.daksh.hibernate_demo;
+import java.util.*;
+import org.hibernate.*;
+import com.daksh.hibernate_demo.util.*;
+import com.daksh.hibernate_demo.entities.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+public class Studentservice {
+	static SessionFactory sessionfactory = Sessionbuilder.getSessionFactory();
+	static void insert(Student s1) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+        	session.persist(s1);
+        	transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void update(int id,Student s1) {
+		try(Session session =sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Student currstudent=session.get(Student.class,id);
+			if(currstudent!=null) {
+				currstudent.setCity(s1.getCity());
+			}
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void view(int id) {
+		try(Session session=sessionfactory.openSession()){
+			Student currstudent=session.get(Student.class,id);
+			if (currstudent != null) {
+	            System.out.println("Name   : " + currstudent.getName());
+	            System.out.println("City   : " + currstudent.getCity());
+	            System.out.println("Review : " + currstudent.getReview());
+	        } else {
+	            System.out.println("Student not found with id: " + id);
+	        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void delete(int id) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Student currstudent=session.get(Student.class,id);
+			if (currstudent != null) {
+	            session.remove(currstudent);
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void viewall() {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			String hql="FROM Student";
+			List<Student>list=session.createQuery(hql,Student.class).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("City   : " + s.getCity());
+	                System.out.println("Review : " + s.getReview());
+	                System.out.println("-------------------");
+	            });
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void viewallbycity(String city) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			String hql="FROM Student WHERE city = :city";
+			List<Student>list=session.createQuery(hql,Student.class).setParameter("city",city).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("City   : " + s.getCity());
+	                System.out.println("Review : " + s.getReview());
+	                System.out.println("-------------------");
+	            });
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void viewallwithCriteria() {
+		try(Session session=sessionfactory.openSession()){
+			CriteriaBuilder cb=session.getCriteriaBuilder();
+			CriteriaQuery<Student>cq=cb.createQuery(Student.class);
+			Root<Student>root=cq.from(Student.class);
+			List<Student> list = session.createQuery(cq).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("City   : " + s.getCity());
+	                System.out.println("Review : " + s.getReview());
+	                System.out.println("-------------------");
+	            });
+	        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	static void pagination(int page, int pageSize) {
+		try(Session session = sessionfactory.openSession()){
+			List<Student>list=session.createQuery("FROM Student ORDER BY id", Student.class)
+	                          .setFirstResult((page - 1) * pageSize)
+	                          .setMaxResults(pageSize)
+	                          .getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+}

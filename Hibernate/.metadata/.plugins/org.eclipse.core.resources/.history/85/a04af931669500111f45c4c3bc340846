@@ -1,0 +1,61 @@
+package com.daksh.Student;
+import com.daksh.Student.entities.*;
+import com.sun.net.httpserver.HttpServer;
+import java.net.InetSocketAddress;
+
+public class App {
+
+    public static void main(String[] args) throws Exception {
+
+        HttpServer server =
+                HttpServer.create(new InetSocketAddress(7000), 0);
+
+        server.createContext("/home", e -> {
+            String res = "home page";
+            e.sendResponseHeaders(200, res.length());
+            e.getResponseBody().write(res.getBytes());
+            e.close();
+        });
+
+        server.createContext("/students", e -> {
+            Services.viewall();
+            String res = "Check console for student list";
+            e.sendResponseHeaders(200, res.length());
+            e.getResponseBody().write(res.getBytes());
+            e.close();
+        });
+
+        server.createContext("/student", e -> {
+            Services.view(1);
+            String res = "Check console for student details";
+            e.sendResponseHeaders(200, res.length());
+            e.getResponseBody().write(res.getBytes());
+            e.close();
+        });
+
+        server.createContext("/insert", e -> {
+
+            String body = new String(e.getRequestBody().readAllBytes());
+
+            System.out.println(body);
+
+            String res = "Data received";
+
+            e.sendResponseHeaders(200, res.length());
+            e.getResponseBody().write(res.getBytes());
+            e.close();
+        });
+
+        server.createContext("/delete", e -> {
+            Services.delete(1);
+            String res = "Student deleted";
+            e.sendResponseHeaders(200, res.length());
+            e.getResponseBody().write(res.getBytes());
+            e.close();
+        });
+
+        server.start();
+
+        System.out.println("Server started on port 7000");
+    }
+}

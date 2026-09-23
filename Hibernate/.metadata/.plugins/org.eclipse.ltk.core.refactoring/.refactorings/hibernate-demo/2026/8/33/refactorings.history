@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Sessionbuilder.java&apos; to &apos;Student/src/main/java/com.daksh.Student.util&apos;&#x0D;&#x0A;- Original project: &apos;hibernate-demo&apos;&#x0D;&#x0A;- Destination element: &apos;Student/src/main/java/com.daksh.Student.util&apos;&#x0D;&#x0A;- Original element: &apos;com.daksh.hibernate_demo.util.Sessionbuilder.java&apos;" description="Copy compilation unit" destination="=Student/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.daksh.Student.util" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.daksh.hibernate_demo.util{Sessionbuilder.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1786373784303" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,5 @@
+package com.daksh.springprogram04.config;
+
+public class SpringConfig {
+
+}

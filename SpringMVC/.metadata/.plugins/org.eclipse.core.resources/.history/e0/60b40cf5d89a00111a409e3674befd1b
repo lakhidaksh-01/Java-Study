@@ -1,0 +1,29 @@
+package com.daksh.auth.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import com.daksh.auth.service.AuthService;
+import com.daksh.auth.model.*;
+@Controller
+public class AuthController {
+	@Autowired
+	private AuthService authservice;
+	
+	@PostMapping("/login")
+	@ResponseBody
+	public String login(@RequestBody LoginRequest request) {
+		boolean result = authservice.login(request.getEmail(),request.getPassword());
+        if (result) {return "Login successful";}
+        return "Invalid email or password";
+	}
+	
+	@PostMapping("/register")
+	@ResponseBody
+	public String register(@RequestBody User request) {
+		return authservice.register(request);
+	}
+}

@@ -1,0 +1,90 @@
+1:57:02 Tab8 FinishNav106
+1:57:02 Tab8 PageLoad
+1:57:03 Tab8 StartNav107 #typed
+1:57:03 Tab8 FinishNav107
+1:57:03 Tab8 PageLoad
+1:57:07 Tab8 StartNav108 #typed
+1:57:07 Tab8 FinishNav108
+1:57:07 Tab8 PageLoad
+1:57:14 Tab8 StartNav109 #typed
+1:57:14 Tab8 FinishNav109
+1:57:14 Tab8 PageLoad
+1:57:19 Tab8 StartNav110 #typed
+1:57:19 Tab8 FinishNav110
+1:57:19 Tab8 PageLoad
+1:57:20 Tab8 StartNav111 #typed
+1:57:20 Tab8 FinishNav111
+1:57:20 Tab8 PageLoad
+1:57:26 Tab8 StartNav112 #typed
+1:57:26 Tab8 FinishNav112
+1:57:26 Tab8 PageLoad
+1:58:45 Tab8 StartNav113 #typed
+1:58:45 Tab8 FinishNav113
+1:58:45 Tab8 PageLoad
+1:58:46 Tab8 StartNav114 #typed
+1:58:46 Tab8 FinishNav114
+1:58:46 Tab8 PageLoad
+1:58:55 Tab8 StartNav115 #typed
+1:58:55 Tab8 FinishNav115
+1:58:55 Tab8 PageLoad
+1:59:14 Tab8 StartNav116 #typed
+1:59:14 Tab8 FinishNav116
+1:59:14 Tab8 PageLoad
+1:59:43 Tab8 StartNav117 #typed
+1:59:43 Tab8 FinishNav117
+1:59:43 Tab8 PageLoad
+1:59:47 Tab8 StartNav118 #typed
+1:59:47 Tab8 FinishNav118
+1:59:47 Tab8 PageLoad
+2:06:48 Tab8 StartNav119 #typed
+2:06:48 Tab8 FinishNav119
+2:06:48 Tab8 PageLoad
+2:06:50 Tab8 StartNav120 #typed
+2:06:50 Tab8 FinishNav120
+2:06:50 Tab8 PageLoad
+2:06:51 Tab8 StartNav121 #typed
+2:06:51 Tab8 FinishNav121
+2:06:51 Tab8 PageLoad
+2:06:53 Tab8 StartNav122 #typed
+2:06:53 Tab8 FinishNav122
+2:06:53 Tab8 PageLoad
+2:06:55 Microsoft.NewBrowser_Popup
+2:06:55 Microsoft.BrowserList.AddBrowser
+2:06:55 Browser9 Insert active Tab9 at 0
+2:06:55 Tab9 StartNav123 #auto_toplevel
+2:06:55 Tab9 StartNav124 #typed
+2:06:55 Tab9 FinishNav123
+2:06:55 Tab9 PageLoad
+2:06:55 Tab9 FinishNav124
+2:06:55 Tab9 PageLoad
+2:06:55 Tab8 StartNav125 #typed
+2:06:55 Tab8 FinishNav125
+2:06:55 Tab8 PageLoad
+2:06:56 Tab9 StartNav126 #typed
+2:06:56 Tab9 FinishNav126
+2:06:56 Tab9 PageLoad
+2:06:56 Tab8 StartNav127 #typed
+2:06:56 Tab8 FinishNav127
+2:06:56 Tab8 PageLoad
+2:06:58 Tab8 StartNav128 #typed
+2:06:58 Tab8 FinishNav128
+2:06:58 Tab8 PageLoad
+2:07:00 Tab8 StartNav129 #typed
+2:07:00 Tab8 FinishNav129
+2:07:00 Tab8 PageLoad
+2:07:01 Tab8 StartNav130 #typed
+2:07:01 Tab8 FinishNav130
+2:07:01 Tab8 PageLoad
+2:07:55 Tab8 StartNav131 #typed
+2:07:55 Tab8 FinishNav131
+2:07:55 Tab8 PageLoad
+2:07:56 Tab8 StartNav132 #typed
+2:07:56 Tab8 FinishNav132
+2:07:56 Tab8 PageLoad
+2:07:59 Tab8 StartNav133 #typed
+2:07:59 Tab8 FinishNav133
+2:07:59 Tab8 PageLoad
+2:08:01 Tab8 StartNav134 #typed
+2:08:01 Tab8 FinishNav134
+2:08:01 Tab8 PageLoad
+2:25:26 Microsoft.UnloadController.IsUnclosableApp_IsNotWebApp

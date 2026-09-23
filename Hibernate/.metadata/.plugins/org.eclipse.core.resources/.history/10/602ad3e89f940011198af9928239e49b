@@ -1,0 +1,19 @@
+package com.daksh.curd_application;
+
+/**
+ * Hello world!
+ *
+ */
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import com.daksh.curd_application.util.*;
+public class App 
+{
+    public static void main( String[] args )
+    {
+        SessionFactory sessionfactory=Sessionfactory.getSessionFactory();
+        try(Session session = sessionfactory.openSession()){
+            System.out.println("Hibernate connected successfully!");
+        }
+    }
+}

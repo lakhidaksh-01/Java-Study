@@ -1,0 +1,14 @@
+package com.daksh.springprogram01.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.*;
+import com.daksh.springprogram01.entities.*;
+@Configuration
+public class AppConfig {
+	@Bean
+    @Scope("prototype")
+	public Student student() {
+		Student st=new Student();
+		return st;
+	}
+}

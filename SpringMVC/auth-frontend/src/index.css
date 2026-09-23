@@ -1,0 +1,467 @@
+/* ===== Dashboard ===== */
+.dashboard-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #e6ecff 100%);
+    text-align: center;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.dashboard-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #4b2ea3; /* deep purple */
+    margin-bottom: 4px;
+}
+
+.dashboard-welcome {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2f5fdc; /* strong blue */
+    margin-bottom: 4px;
+}
+
+.dashboard-text {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+.dashboard-logout-btn {
+    padding: 10px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f6ef7, #7b3fe4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(90, 60, 220, 0.25);
+}
+
+.dashboard-logout-btn:hover {
+    background: linear-gradient(135deg, #3f5be0, #6a2fd0);
+    box-shadow: 0 6px 16px rgba(90, 60, 220, 0.35);
+    transform: translateY(-1px);
+}
+
+.dashboard-logout-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(90, 60, 220, 0.3);
+}
+
+
+/* ===== Login ===== */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #e6ecff 100%);
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4b2ea3;
+    margin-bottom: 10px;
+}
+
+.login-input {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1.5px solid #c9d3f5;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #2b2b2b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-input:focus {
+    border-color: #7b3fe4;
+    box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.15);
+}
+
+.login-input::placeholder {
+    color: #9aa3b5;
+}
+
+.login-btn {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f6ef7, #7b3fe4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(90, 60, 220, 0.25);
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #3f5be0, #6a2fd0);
+    box-shadow: 0 6px 16px rgba(90, 60, 220, 0.35);
+    transform: translateY(-1px);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(90, 60, 220, 0.3);
+}
+
+.login-link-btn {
+    background: none;
+    border: none;
+    color: #2f5fdc;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 2px;
+    transition: color 0.2s ease;
+}
+
+.login-link-btn:hover {
+    color: #7b3fe4;
+}
+
+
+/* ===== Register ===== */
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #e6ecff 100%);
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.register-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4b2ea3;
+    margin-bottom: 10px;
+}
+
+.register-input {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1.5px solid #c9d3f5;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #2b2b2b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-input:focus {
+    border-color: #7b3fe4;
+    box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.15);
+}
+
+.register-input::placeholder {
+    color: #9aa3b5;
+}
+
+.register-btn {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f6ef7, #7b3fe4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(90, 60, 220, 0.25);
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #3f5be0, #6a2fd0);
+    box-shadow: 0 6px 16px rgba(90, 60, 220, 0.35);
+    transform: translateY(-1px);
+}
+
+.register-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(90, 60, 220, 0.3);
+}
+
+.register-link-btn {
+    background: none;
+    border: none;
+    color: #2f5fdc;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 2px;
+    transition: color 0.2s ease;
+}
+
+.register-link-btn:hover {
+    color: #7b3fe4;
+}
+
+/* ===== Forgot Password ===== */
+.forgot-password-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #e6ecff 100%);
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.forgot-password-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4b2ea3;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.forgot-password-input {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1.5px solid #c9d3f5;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #2b2b2b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.forgot-password-input:focus {
+    border-color: #7b3fe4;
+    box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.15);
+}
+
+.forgot-password-input::placeholder {
+    color: #9aa3b5;
+}
+
+.forgot-password-btn {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f6ef7, #7b3fe4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(90, 60, 220, 0.25);
+}
+
+.forgot-password-btn:hover {
+    background: linear-gradient(135deg, #3f5be0, #6a2fd0);
+    box-shadow: 0 6px 16px rgba(90, 60, 220, 0.35);
+    transform: translateY(-1px);
+}
+
+.forgot-password-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(90, 60, 220, 0.3);
+}
+
+.forgot-password-link-btn {
+    background: none;
+    border: none;
+    color: #2f5fdc;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 2px;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-link-btn:hover {
+    color: #7b3fe4;
+}
+
+
+/* ===== Verify OTP ===== */
+.verify-otp-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #e6ecff 100%);
+    font-family: "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+}
+
+.verify-otp-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4b2ea3;
+    margin-bottom: 4px;
+}
+
+.verify-otp-text {
+    font-size: 0.95rem;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.verify-otp-input {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 14px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-align: center;
+    border: 1.5px solid #c9d3f5;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #2b2b2b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.verify-otp-input:focus {
+    border-color: #7b3fe4;
+    box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.15);
+}
+
+.verify-otp-input::placeholder {
+    color: #9aa3b5;
+    letter-spacing: normal;
+}
+
+.verify-otp-btn {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f6ef7, #7b3fe4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(90, 60, 220, 0.25);
+}
+
+.verify-otp-btn:hover {
+    background: linear-gradient(135deg, #3f5be0, #6a2fd0);
+    box-shadow: 0 6px 16px rgba(90, 60, 220, 0.35);
+    transform: translateY(-1px);
+}
+
+.verify-otp-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(90, 60, 220, 0.3);
+}
+
+
+/* ===== Reset Password ===== */
+.reset-password-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #e6ecff 100%);
+    font-family: "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+}
+
+.reset-password-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4b2ea3;
+    margin-bottom: 4px;
+}
+
+.reset-password-text {
+    font-size: 0.95rem;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.reset-password-input {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1.5px solid #c9d3f5;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #2b2b2b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reset-password-input:focus {
+    border-color: #7b3fe4;
+    box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.15);
+}
+
+.reset-password-input::placeholder {
+    color: #9aa3b5;
+}
+
+.reset-password-btn {
+    width: 280px;
+    max-width: 85vw;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f6ef7, #7b3fe4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(90, 60, 220, 0.25);
+}
+
+.reset-password-btn:hover {
+    background: linear-gradient(135deg, #3f5be0, #6a2fd0);
+    box-shadow: 0 6px 16px rgba(90, 60, 220, 0.35);
+    transform: translateY(-1px);
+}
+
+.reset-password-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(90, 60, 220, 0.3);
+}

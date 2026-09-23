@@ -1,0 +1,12 @@
+<html>
+<body>
+<h2>home</h2>
+<form action="sub">
+<h1>sub numbers</h1>
+<input type="number "name="t1"/>
+<input type="number "name="t2"/>
+<button type="submit">submit</button>
+</form>
+<h2>Result is: <%= request.getAttribute("result") %></h2>
+</body>
+</html>

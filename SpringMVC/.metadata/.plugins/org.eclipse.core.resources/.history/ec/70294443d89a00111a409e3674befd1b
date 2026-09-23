@@ -1,0 +1,5 @@
+package com.daksh.auth.controller;
+
+public class AuthController {
+
+}

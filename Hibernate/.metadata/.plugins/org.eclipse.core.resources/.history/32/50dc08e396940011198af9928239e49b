@@ -1,0 +1,21 @@
+package com.daksh.curd_application.entities;
+import java.time.LocalDate;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="order_Items")
+public class OrderItem {
+	@Id
+	private int id;
+	@Column
+	private int quantity;
+	private LocalDate orderDate;
+	
+	@ManyToOne
+	@JoinColumn(name="orders_customer")
+	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name="order_product")
+	private Product product;
+}

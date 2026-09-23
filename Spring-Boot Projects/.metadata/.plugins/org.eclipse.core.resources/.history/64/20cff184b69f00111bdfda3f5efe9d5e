@@ -1,0 +1,5 @@
+package com.daksh.repository;
+
+public class StudentRepo {
+
+}

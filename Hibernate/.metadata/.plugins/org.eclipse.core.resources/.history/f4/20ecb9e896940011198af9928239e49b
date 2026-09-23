@@ -1,0 +1,16 @@
+package com.daksh.curd_application.entities;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="customers")
+public class Customer {
+	@Id
+	private int Id;
+	@Column
+	private String name;
+	@Column
+	private String email;
+	@Column
+	private String phone;
+	
+}

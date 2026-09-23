@@ -1,0 +1,22 @@
+package com.daksh.springprogram04.entities;
+
+public class Restaurant {
+	private String name;
+	private Chef chef;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Chef getChef() {
+		return chef;
+	}
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+	public void print() {
+		System.out.print("Name: "+name+" Chef: ");
+		chef.display();
+	}
+}

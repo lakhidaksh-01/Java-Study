@@ -1,0 +1,67 @@
+package com.daksh.hibernate_demo.entities;
+import java.util.*;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
+@Entity
+@Table(name="students")
+public class Student {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
+	private int id;
+	@Column(name="name", length=100, unique=true)
+	private String name;
+	
+	@Column(name="city", length=100, nullable=true)
+	private String city;
+	
+	@Lob
+	private String review;
+    
+	@OneToMany(mappedBy = "student",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+	private List<Certificates>list=new ArrayList<>();
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
+	
+}

@@ -1,0 +1,139 @@
+package MAIN;
+import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class StudentsAdvance {
+	static String url="jdbc:mysql://localhost:3306/students";
+	static String role="root";
+	static String pass="DakshLakhi@123";
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("Select Options");
+			System.out.println("Option 1: Insert new student");
+			System.out.println("Option 2: Update studentmarks");
+			System.out.println("Option 3: Get Student Sorted by name");
+			System.out.println("Option 4: Get Student Count By City");
+			System.out.println("Option 5: Get Student Marks Report");
+			
+			int n=sc.nextInt();
+			switch(n) {
+			case 1:{
+				String name=sc.next();
+				String city=sc.next();
+				addStudent(name,city);
+			}
+			break;
+			case 2:{
+				int studentId=sc.nextInt();
+				int marks=sc.nextInt();
+				String subject=sc.next();
+				addMarks(studentId,subject,marks);
+			}
+			break;
+			case 3:getStudentsSortedByName();
+			break;
+			case 4:getStudentCountByCity();
+			break;
+			case 5:getStudentMarksReport();
+			break;
+			}
+		}
+	}
+	static void addStudent(String name, String city) {
+		String sql="INSERT INTO students1 (name, city) VALUES(?, ?);";
+		try {
+		Connection con=DriverManager.getConnection(url,role,pass);
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setString(1, name);
+		ps.setString(2, city);
+		int rs=ps.executeUpdate();
+		System.out.println("student added");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void addMarks(int studentId, String subject, int marks) {
+		String sql="INSERT INTO marks (student_id, subject, marks) VALUES(?, ?, ?);";
+		try {
+		Connection con=DriverManager.getConnection(url,role,pass);
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setInt(1, studentId);
+		ps.setString(2, subject);
+		ps.setInt(3, marks);
+		int rs=ps.executeUpdate();
+		System.out.println("marks added");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void getStudentsSortedByName() {
+		String sql="SELECT * FROM students1 ORDER BY name ASC;";
+		try {
+		Connection con=DriverManager.getConnection(url,role,pass);
+		PreparedStatement ps=con.prepareStatement(sql);
+		ResultSet rsn = ps.executeQuery();
+
+        System.out.println("STUDENTS LIST");
+        System.out.println("-------------------------------");
+
+        while (rsn.next()) {
+
+            int id = rsn.getInt("id");
+            String name = rsn.getString("name");
+            String city = rsn.getString("city");
+            System.out.println(id + " | " +name + " | " +city );
+        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void getStudentCountByCity() {
+		String sql="SELECT city, COUNT(*) AS count FROM students1 GROUP BY city;";
+		try {
+		Connection con=DriverManager.getConnection(url,role,pass);
+		PreparedStatement ps=con.prepareStatement(sql);
+		ResultSet rsn = ps.executeQuery();
+
+        System.out.println("LIST");
+        System.out.println("-------------------------------");
+
+        while (rsn.next()) {
+
+            String city = rsn.getString("city");
+            int count = rsn.getInt("count");
+            System.out.println(city + " | " +count  );
+        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void getStudentMarksReport() {
+		String sql ="SELECT s.name, m.subject, m.marks " +"FROM students1 s " +"JOIN marks m ON s.id = m.student_id";
+		try {
+		Connection con=DriverManager.getConnection(url,role,pass);
+		PreparedStatement ps=con.prepareStatement(sql);
+		ResultSet rsn = ps.executeQuery();
+
+        System.out.println("STUDENTS LIST");
+        System.out.println("-------------------------------");
+
+        while (rsn.next()) {
+
+            String name = rsn.getString("name");
+            String subject = rsn.getString("subject");
+            String marks = rsn.getString("marks");
+            System.out.println(name + " | " +subject + " | " +marks );
+        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

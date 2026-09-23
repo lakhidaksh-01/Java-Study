@@ -1,0 +1,5 @@
+package com.daksh.curd_application.entities;
+
+public class Product {
+
+}

@@ -1,0 +1,138 @@
+package MAIN;
+
+import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
+
+public class main {
+	static String url="jdbc:mysql://localhost:3306/students";
+	static String role="root";
+	static String pass="DakshLakhi@123";
+	
+	public static void main(String[] args) {
+    
+		System.out.println("Select Options");
+		System.out.println("Option 1: Insert new student");
+		System.out.println("Option 2: Update student");
+		System.out.println("Option 3: Delete student");
+		System.out.println("Option 4: Read all data");
+		
+		Scanner sc=new Scanner(System.in);
+		
+		int a=sc.nextInt();
+		switch(a) {
+		  case 1:insert();
+		  break;
+		  case 2:updatemarks();
+		  break;
+		  case 3:delete();
+		  break;
+		  case 4:view();
+		  break;
+		  default:System.out.println("pls enter vaild data");
+		}
+	}
+	public static void insert() {
+		Scanner sc=new Scanner(System.in);
+
+		System.out.println("Enter name:");
+		String name=sc.next();
+		System.out.println("Enter course");
+		String course=sc.next();
+		System.out.println("Enter marks");
+		int marks=sc.nextInt();
+		String sql="INSERT INTO STUDENTS(Name,Course,Marks) VALUES ("+url+","+role+","+marks+");";
+		try {
+			Connection con = DriverManager.getConnection(url,role,pass);
+			PreparedStatement ps= con.prepareStatement(sql);
+			ResultSet rs= ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				int dbid = rs.getInt("id");
+                String dbname = rs.getString("name");
+                String dbcourse = rs.getString("course");
+                double dbmarks = rs.getDouble("marks");
+
+                System.out.println(dbid + " | " +dbname + " | " +dbcourse + " | " +dbmarks);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+    public static void updatemarks() {
+    	Scanner sc=new Scanner(System.in);
+		System.out.println("Enter ID");
+		int id=sc.nextInt();
+		System.out.println("Enter marks");
+		int marks=sc.nextInt();
+		String sql="UPDATE Students SET marks="+marks+" WHERE Id="+id+";";		
+		try {
+			Connection con = DriverManager.getConnection(url,role,pass);
+			PreparedStatement ps= con.prepareStatement(sql);
+			ResultSet rs= ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				int dbid = rs.getInt("id");
+                String dbname = rs.getString("name");
+                String dbcourse = rs.getString("course");
+                double dbmarks = rs.getDouble("marks");
+
+                System.out.println(dbid + " | " +dbname + " | " +dbcourse + " | " +dbmarks);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+    public static void delete() {
+    	Scanner sc=new Scanner(System.in);
+		System.out.println("Enter ID");
+		int id=sc.nextInt();
+		String sql="DELETE FROM STUDENTS WHERE Id="+id+";";
+		try {
+			Connection con = DriverManager.getConnection(url,role,pass);
+			PreparedStatement ps= con.prepareStatement(sql);
+			ResultSet rs= ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				int dbid = rs.getInt("id");
+                String dbname = rs.getString("name");
+                String dbcourse = rs.getString("course");
+                double dbmarks = rs.getDouble("marks");
+
+                System.out.println(dbid + " | " +dbname + " | " +dbcourse + " | " +dbmarks);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+    public static void view() {
+		String sql="SELECT * FROM students;";
+		try {
+			Connection con = DriverManager.getConnection(url,role,pass);
+			PreparedStatement ps= con.prepareStatement(sql);
+			ResultSet rs= ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String course = rs.getString("course");
+                double marks = rs.getDouble("marks");
+
+                System.out.println(id + " | " +name + " | " +course + " | " +marks);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+}

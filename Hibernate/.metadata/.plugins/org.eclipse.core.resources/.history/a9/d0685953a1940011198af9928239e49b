@@ -1,0 +1,66 @@
+package com.daksh.curd_application;
+import com.daksh.curd_application.util.Sessionfactory;
+import com.daksh.curd_application.entities.Customer;
+import com.daksh.curd_application.entities.Product;
+import java.time.LocalDate;
+import org.hibernate.*;
+import java.util.*;
+public class ShopService {
+	static SessionFactory sessionfactory = Sessionfactory.getSessionFactory();
+	public static void addCustomer(Customer customer) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			session.persist(customer);
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void addProduct(Product product) { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			session.persist(product);
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void viewAllProducts() { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			String hqlquery="FROM product";
+			List<Product>list=session.createQuery( hqlquery,Product.class).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("Price   : " + s.getPrice());
+	                System.out.println("Stock Quantity : " + s.getStockQuantity());
+	                System.out.println("-------------------");
+	            });
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void updateProductStock(int productId, int stock) { 
+		
+	}
+
+	public static void placeOrder(int customerId, int productId, int quantity, LocalDate orderDate) { }
+
+	public static void viewCustomerOrders(int customerId) { }
+
+	public static void viewProductBuyers(int productId) { }
+
+	public static void deleteCustomer(int customerId) { }
+
+	public static void deleteProduct(int productId) { }
+}

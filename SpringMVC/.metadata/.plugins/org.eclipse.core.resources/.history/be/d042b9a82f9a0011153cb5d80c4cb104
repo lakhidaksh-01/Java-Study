@@ -1,0 +1,10 @@
+package com.daksh.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller
+public class AddController {
+	  @RequestMapping("/home")
+	  public String add() {
+		  return "Hello Spring MVC!";
+	  }
+}

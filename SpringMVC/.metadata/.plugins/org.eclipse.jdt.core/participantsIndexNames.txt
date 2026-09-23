@@ -1,0 +1,7 @@
+INDEX VERSION 1.134
+C:\Users\DAKSH LAKHI\OneDrive\Desktop\SpringMVC\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1446278970.index
+\springmvc\src\main\java
+C:\Users\DAKSH LAKHI\OneDrive\Desktop\SpringMVC\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1132148835.index
+\auth-backend\src\main\resources
+C:\Users\DAKSH LAKHI\OneDrive\Desktop\SpringMVC\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3490526498.index
+\springmvc\src\main\resources

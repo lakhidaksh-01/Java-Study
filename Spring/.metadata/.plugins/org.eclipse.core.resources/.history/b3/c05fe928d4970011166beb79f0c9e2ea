@@ -1,0 +1,22 @@
+package com.daksh.springprogram04;
+
+/**
+ * Hello world!
+ *
+ */
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.daksh.springprogram04.config.SpringConfig;
+import com.daksh.springprogram04.entities.Restaurant;
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+        Restaurant r = context.getBean(Restaurant.class);
+
+        r.print();
+    }
+}

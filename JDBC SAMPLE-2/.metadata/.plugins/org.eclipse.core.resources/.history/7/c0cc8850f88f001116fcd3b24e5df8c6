@@ -1,0 +1,44 @@
+package MAIN;
+
+import java.util.Scanner;
+import java.sql.*;
+
+public class main {
+	static String url="jdbc:mysql://localhost:3306/students";
+	static String role="root";
+	static String pass="DakshLakhi@123";
+	public static void main(String[] args) {
+		System.out.println("Select Options");
+		System.out.println("Option 1: Insert new student");
+		System.out.println("Option 2: Update student");
+		System.out.println("Option 3: Delete student");
+		System.out.println("Option 4: Read all data");
+		
+		Scanner sc=new Scanner(System.in);
+		
+		int a=sc.nextInt();
+		switch(a) {
+		  case 1:insert();
+		  break;
+		  case 2:update();
+		  break;
+		  case 3:delete();
+		  break;
+		  case 4:view();
+		  break;
+		  default:System.out.println("pls enter vaild data");
+		}
+	}
+	public static void insert() {
+		
+	}
+    public static void update() {
+		
+	}
+    public static void delete() {
+		
+	}
+    public static void view() {
+    	
+    }
+}

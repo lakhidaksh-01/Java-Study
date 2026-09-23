@@ -1,0 +1,119 @@
+Spring Boot is a open-source framework which is built on top of the spring framework for java developers. was realesed in 2014
+the term boot refers to concept of rapidly initiating a spring application by handling all essential set ups and configurations.
+
+Spring Boot Core Principles - 1. Opinionated Defaults - Maven
+                                                      - Dependencies
+                                                      - Project Structure
+                                                      - Application properties
+
+                              2. Convention Over Configuration 
+                              3. Auto - Configuration
+                              4. Embedded Servers
+
+Use of Spring Boot
+
+- Web Application
+- Restful Web Services
+- Microservices
+- Batch processing
+- Integration with other technologies
+- Testing
+- Monitoring & Managment
+
+
+Spring Boot starters are Dependency Descriptors 
+(Dependency= External Libraries or JARs  , Descriptor= configuration specifying Jarsand their versions)
+
+Spring Boot starters combine all the necessary libraries (JAR files) for a particular feature or technology into a single dependency.
+
+examples
+
+1. spring-boot-starter → Core Spring Boot starter providing basic auto-configuration, logging, and core Spring Boot functionality.
+2. spring-boot-starter-web → Used to build web applications and REST APIs using Spring MVC, embedded Tomcat, and JSON support.
+3. spring-boot-starter-data-jpa → Provides JPA/Hibernate support for working with relational databases using repositories and ORM.
+4. spring-boot-starter-security → Adds Spring Security for authentication, authorization, password protection, and securing web applications/APIs.
+5. spring-boot-starter-thymeleaf → Integrates Thymeleaf for creating dynamic server-side HTML pages.
+6. spring-boot-starter-aop → Provides Aspect-Oriented Programming support for features like logging, transactions, and method interception.
+7. spring-boot-starter-test → Provides testing libraries such as JUnit, Mockito, Spring Test, and AssertJ for unit and integration testing.
+8. spring-boot-starter-actuator → Provides production-ready monitoring and management endpoints such as health, metrics, info, and application status.
+
+
+
+Standlone application - basic default spring-boot-starter only , The program starts and runs by itself.
+
+web application - 
+Spring Boot Application
+        ↓
+Embedded Tomcat
+        ↓
+      HTTP
+        ↓
+     Browser
+
+
+
+@SpringBootApplication -> Main annotation provides setup and configurations for our spring boot application.
+
+@SpringBootApplication = @Configuration (Tells Spring this class contains bean/configuration definitions.) 
+                             + 
+                         @ComponentScan (Tells Spring to search packages for classes like @Component, @Service, @Controller, etc.)
+                             + 
+                         @EnableAutoConfiguration (Tells Spring Boot to automatically configure things based on your dependencies and environment.)
+
+
+
+
+there is always a fomate we have to follow for backend structure of spring boot application
+
+1. Controllers - Handle incoming https requests, process them and return appropriate responses.
+2. services - contains business logic functions which are triggered by controllers.
+3. domain - conatins entities(tables) and there enums.
+4. dto - the format of incomming and outgoing data.
+5. repositories - jpa repositories which are used to interact with database. and also has predefined methods for CRUD operations.
+
+
+@RestController - is a combination of @Controller and @ResponseBody annotations. It is used to create RESTful web services in Spring Boot.
+@RestMapping("/api/items") - is used to map HTTP requests to specific methods in the controller.
+public class xyz{
+  @PostMapping("/add") - is used to handle HTTP POST requests data.
+  public void abc(@RequestBody Item item) {
+    // Logic to add the item
+  }
+
+  @GetMapping("/get/{id}") - is used to handle HTTP GET requests. (in this example /api/items/get/1169)
+  public Item getItem(@PathVariable Long id) {
+    // Logic to retrieve the item by id
+    return itemService.getItemById(id);
+  }
+
+}
+
+
+
+@RequestParam - GET /api/items?name=abc&category=xyz    
+
+inside function
+name=abc  
+category=xyz
+
+
+@Service
+
+
+@Repository    (it's always an interface which extends JpaRepository<Entity, Long> because it provides CRUD operations and other methods for interacting with the database.)
+
+JPARepository<Entity, id type> - is a Spring Data interface that provides CRUD operations and other methods for interacting with the database. It is used to define the repository layer in a Spring Boot application.
+
+
+automatically creates methods.
+and some are predefined
+save()
+findById()
+findAll()
+deleteById()
+
+
+@Entity
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY) - is used to specify that the primary key value should be automatically generated by the database using an identity column. This means that the database will generate a unique value for the primary key when a new entity is inserted into the table.

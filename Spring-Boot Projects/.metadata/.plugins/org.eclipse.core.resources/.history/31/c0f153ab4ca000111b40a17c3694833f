@@ -1,0 +1,36 @@
+package com.daksh.services;
+
+import com.daksh.domain.Student;
+import com.daksh.dto.StudentDTO;
+import com.daksh.repository.*;
+import java.util.*;
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentService {
+	public StudentRepo studentrepo;
+	public StudentService(StudentRepo studentrepo) {
+		this.studentrepo=studentrepo;
+	}
+	public void createStudent(StudentDTO std) {
+		Student student=new Student();
+		student.setName(std.getName());
+		student.setNumber(std.getNumber());
+		studentrepo.save(student);
+		System.out.print("student created");
+	}
+	public List<Student> viewall(){
+		return studentrepo.findAll();
+	}
+	public void deleteById(int id) {
+		studentrepo.deleteById(id);
+	}
+	public void updateNumberById(int number,int id) {
+		Optional<Student> std=studentrepo.findById(id);
+		if(std.isPresent()) {
+			Student student=std.get();
+			student.setNumber(number);
+			studentrepo.save(student);
+		}
+	}
+}

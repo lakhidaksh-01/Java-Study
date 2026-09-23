@@ -1,0 +1,53 @@
+package com.daksh.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class MainApp {
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/company_db";
+        String user = "root";
+        String password = "DakshLakhi@123";
+
+        String sql = "SELECT * FROM employee";
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("EMPLOYEE LIST");
+            System.out.println("-------------------------------");
+
+            while (rs.next()) {
+
+                int id = rs.getInt("emp_id");
+                String name = rs.getString("emp_name");
+                String desig = rs.getString("designation");
+                double salary = rs.getDouble("salary");
+
+                System.out.println(
+                    id + " | " +
+                    name + " | " +
+                    desig + " | " +
+                    salary
+                );
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+}

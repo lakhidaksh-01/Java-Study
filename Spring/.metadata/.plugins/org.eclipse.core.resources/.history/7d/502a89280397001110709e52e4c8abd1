@@ -1,0 +1,5 @@
+package com.daksh.springprogram01;
+
+public class AppConfig {
+
+}

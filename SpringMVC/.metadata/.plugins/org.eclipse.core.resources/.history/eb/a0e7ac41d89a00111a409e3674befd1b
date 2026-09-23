@@ -1,0 +1,5 @@
+package com.daksh.auth.service;
+
+public class AuthService {
+
+}

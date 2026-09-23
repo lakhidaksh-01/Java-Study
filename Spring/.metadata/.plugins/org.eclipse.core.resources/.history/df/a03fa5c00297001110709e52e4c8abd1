@@ -1,0 +1,6 @@
+public class SpringConfig {
+	public Student stdid(){
+		Student st=new Student();
+		return st; 
+	}
+}

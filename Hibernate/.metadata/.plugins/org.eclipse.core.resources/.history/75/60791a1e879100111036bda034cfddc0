@@ -1,0 +1,18 @@
+package com.daksh.hibernate_demo;
+
+/**
+ * Hello world!
+ *
+ */
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import com.daksh.hibernate_demo.util.*;
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+        SessionFactory session = Sessionbuilder.getSessionFactory();
+        System.out.print(session);
+    }
+}

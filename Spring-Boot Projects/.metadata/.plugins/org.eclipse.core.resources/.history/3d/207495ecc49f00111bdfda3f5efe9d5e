@@ -1,0 +1,5 @@
+package com.daksh.domain;
+
+public class Student {
+
+}

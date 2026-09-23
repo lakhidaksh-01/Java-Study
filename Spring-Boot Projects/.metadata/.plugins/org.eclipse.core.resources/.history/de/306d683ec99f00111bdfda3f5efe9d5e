@@ -1,0 +1,13 @@
+package com.daksh.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FirstSpringBoot2Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FirstSpringBoot2Application.class, args);
+	}
+
+}

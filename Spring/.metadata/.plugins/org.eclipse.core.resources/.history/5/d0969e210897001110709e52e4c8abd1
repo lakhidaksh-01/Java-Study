@@ -1,0 +1,5 @@
+package com.daksh.springprogram02.enities;
+
+public class Student {
+
+}

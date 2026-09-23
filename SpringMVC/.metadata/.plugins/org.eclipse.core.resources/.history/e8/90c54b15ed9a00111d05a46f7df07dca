@@ -1,0 +1,62 @@
+package com.daksh.auth.service;
+import org.springframework.stereotype.Service;
+import com.daksh.auth.model.*;
+import java.util.*;
+@Service
+public class AuthService {
+    private List<User> users = new ArrayList<>();
+    private String otp;
+    private String otpEmail;
+    
+    public boolean login(String email, String password) {
+    	for(User user:users) {
+    		if(user.getEmail().equals(email) && user.getPassword().equals(password)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    public String register(User user) {
+    	for (User existingUser : users) {
+
+            if (existingUser.getEmail().equals(user.getEmail())) {
+                return "Email already registered";
+            }
+        }
+
+        users.add(user);
+
+        return "Registration successful";
+    }
+    public String generateOtp(String email) {
+    	for(User user:users) {
+    		if (user.getEmail().equals(email)) {
+
+                Random random = new Random();
+                otp = String.valueOf(100000 + random.nextInt(900000));
+                otpEmail = email;
+                System.out.println("OTP: " + otp);
+                return "OTP generated";
+            }
+    	}
+    	return "Email not found";
+    }
+    public boolean verifyOtp(String email, String enteredOtp) {
+
+        return email.equals(otpEmail) && enteredOtp.equals(otp);
+    }
+    public String resetPassword(String email, String newPassword) {
+
+        for (User user : users) {
+
+            if (user.getEmail().equals(email)) {
+
+                user.setPassword(newPassword);
+
+                return "Password reset successful";
+            }
+        }
+
+        return "Email not found";
+    }
+}

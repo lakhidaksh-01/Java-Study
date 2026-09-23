@@ -1,0 +1,98 @@
+0:59:15 Tab38 StartNav419 #typed
+0:59:15 Tab38 FinishNav419
+0:59:15 Tab38 PageLoad
+0:59:26 Tab38 StartNav420 #typed
+0:59:26 Tab38 FinishNav420
+0:59:26 Tab38 PageLoad
+0:59:26 Tab38 StartNav421 #typed
+0:59:26 Tab38 FinishNav421
+0:59:26 Tab38 PageLoad
+0:59:27 Tab38 StartNav422 #typed
+0:59:27 Tab38 FinishNav422
+0:59:27 Tab38 PageLoad
+1:00:26 Tab38 StartNav423 #typed
+1:00:26 Tab38 FinishNav423
+1:00:26 Tab38 PageLoad
+1:00:29 Tab38 StartNav424 #typed
+1:00:29 Tab38 FinishNav424
+1:00:29 Tab38 PageLoad
+1:00:33 Tab38 StartNav425 #typed
+1:00:33 Tab38 FinishNav425
+1:00:33 Tab38 PageLoad
+1:00:36 Tab38 StartNav426 #typed
+1:00:36 Tab38 FinishNav426
+1:00:36 Tab38 PageLoad
+1:00:37 Tab38 StartNav427 #typed
+1:00:37 Tab38 FinishNav427
+1:00:37 Tab38 PageLoad
+1:00:45 Tab38 StartNav428 #typed
+1:00:45 Tab38 FinishNav428
+1:00:45 Tab38 PageLoad
+1:00:50 Tab38 StartNav429 #typed
+1:00:51 Tab38 FinishNav429
+1:00:51 Tab38 PageLoad
+1:00:55 Tab38 StartNav430 #typed
+1:00:55 Tab38 FinishNav430
+1:00:55 Tab38 PageLoad
+1:00:56 Tab38 StartNav431 #typed
+1:00:57 Tab38 FinishNav431
+1:00:57 Tab38 PageLoad
+1:01:01 Tab38 StartNav432 #typed
+1:01:01 Tab38 FinishNav432
+1:01:01 Tab38 PageLoad
+1:01:08 Tab38 StartNav433 #typed
+1:01:08 Tab38 FinishNav433
+1:01:08 Tab38 PageLoad
+1:01:22 Tab38 StartNav434 #typed
+1:01:22 Tab38 FinishNav434
+1:01:22 Tab38 PageLoad
+1:09:34 Tab38 StartNav435 #typed
+1:09:34 Tab38 FinishNav435
+1:09:34 Tab38 PageLoad
+1:09:36 Tab38 StartNav436 #typed
+1:09:36 Tab38 FinishNav436
+1:09:36 Tab38 PageLoad
+1:09:38 Tab38 StartNav437 #typed
+1:09:38 Tab38 FinishNav437
+1:09:38 Tab38 PageLoad
+1:31:58 Tab38 StartNav438 #typed
+1:31:58 Tab38 FinishNav438
+1:31:58 Tab38 PageLoad
+1:32:17 Tab38 StartNav439 #typed
+1:32:17 Tab38 FinishNav439
+1:32:17 Tab38 PageLoad
+1:46:25 Tab38 StartNav440 #typed
+1:46:25 Tab38 FinishNav440
+1:46:25 Tab38 PageLoad
+1:46:31 Tab38 StartNav441 #typed
+1:46:31 Tab38 FinishNav441
+1:46:31 Tab38 PageLoad
+1:46:37 Tab38 StartNav442 #typed
+1:46:37 Tab38 FinishNav442
+1:46:37 Tab38 PageLoad
+1:46:41 Tab38 StartNav443 #typed
+1:46:41 Tab38 FinishNav443
+1:46:41 Tab38 PageLoad
+1:47:22 Microsoft.UnloadController.IsUnclosableApp_IsNotWebApp
+0:00:00 Startup
+0:00:00 Microsoft.DeleteProfileHelper.CleanUpEphemeralProfiles
+0:00:00 Microsoft.DeleteProfileHelper.CleanUpDeletedProfiles
+0:00:00 Microsoft.NewBrowser_Popup
+0:00:00 Microsoft.BrowserList.AddBrowser
+0:00:00 Browser1 Insert active Tab1 at 0
+0:00:00 Tab1 StartNav1 #auto_toplevel
+0:00:00 Microsoft.NewBrowser_Popup
+0:00:00 Microsoft.BrowserList.AddBrowser
+0:00:00 Browser2 Insert active Tab2 at 0
+0:00:00 Tab2 StartNav2 #auto_toplevel
+0:00:00 Tab1 StartNav3 #typed
+0:00:00 Tab2 StartNav4 #typed
+0:00:00 Tab2 FinishNav2
+0:00:00 Tab1 FinishNav1
+0:00:00 Tab2 PageLoad
+0:00:00 Tab1 PageLoad
+0:00:01 Tab2 FinishNav4
+0:00:01 Tab1 FinishNav3
+0:00:01 Tab1 PageLoad
+0:00:02 Tab2 PageLoad
+1:58:48 Microsoft.UnloadController.IsUnclosableApp_IsNotWebApp

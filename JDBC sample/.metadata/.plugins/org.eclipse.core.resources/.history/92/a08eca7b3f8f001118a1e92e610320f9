@@ -1,0 +1,27 @@
+package com.daksh.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class MainApp {
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://LAPTOP-T69E4FDD:3306/company";
+        String user = "root";
+        String password = ""; // empty if no password
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            System.out.println("Connected to MySQL successfully!");
+
+            con.close();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,0 +1,171 @@
+package com.daksh.curd_application;
+import com.daksh.curd_application.util.Sessionfactory;
+import com.daksh.curd_application.entities.Customer;
+import com.daksh.curd_application.entities.Product;
+import com.daksh.curd_application.entities.OrderItem;
+import java.time.LocalDate;
+import org.hibernate.*;
+import java.util.*;
+public class ShopService {
+	static SessionFactory sessionfactory = Sessionfactory.getSessionFactory();
+	public static void addCustomer(Customer customer) {
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			session.persist(customer);
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void addProduct(Product product) { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			session.persist(product);
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void viewAllProducts() { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			String hqlquery="FROM Product";
+			List<Product>list=session.createQuery( hqlquery,Product.class).getResultList();
+			if (list.isEmpty()) {
+	            System.out.println("No students found.");
+	        } else {
+	            list.forEach(s -> {
+	                System.out.println("-------------------");
+	                System.out.println("ID     : " + s.getId());
+	                System.out.println("Name   : " + s.getName());
+	                System.out.println("Price   : " + s.getPrice());
+	                System.out.println("Stock Quantity : " + s.getStockQuantity());
+	                System.out.println("-------------------");
+	            });
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void updateProductStock(int productId, int stock) { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Product currproduct=session.get(Product.class,productId );
+			if(currproduct!=null) {
+				currproduct.setStockQuantity(stock);
+			}
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void placeOrder(int customerId, int productId, int quantity, LocalDate orderDate) { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Customer currcustomer=session.get(Customer.class,customerId);
+			Product currproduct=session.get(Product.class,productId);
+			if(currproduct!=null) {
+				currproduct.setStockQuantity(currproduct.getStockQuantity()-quantity);
+			}
+			OrderItem order=new OrderItem();
+			order.setQuantity(quantity);
+			order.setOrderDate(orderDate);
+			order.setProduct(currproduct);
+			order.setCustomer(currcustomer);
+			session.persist(order);
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void viewCustomerOrders(int customerId) {
+		try(Session session=sessionfactory.openSession()){
+		Transaction transaction=session.beginTransaction();
+		String hqlquery="FROM OrderItem WHERE customer.id = :customerId";
+		List<OrderItem>list=session.createQuery( hqlquery,OrderItem.class).setParameter("customerId", customerId).getResultList();
+		if (list.isEmpty()) {
+            System.out.println("No students found.");
+        } else {
+        	list.forEach(s -> {
+
+        	    System.out.println("-------------------");
+        	    System.out.println("OrderItem ID   : " + s.getId());
+        	    System.out.println("Quantity       : " + s.getQuantity());
+        	    System.out.println("Order Date     : " + s.getOrderDate());
+        	    if (s.getCustomer() != null) {
+        	        System.out.println("Customer ID    : " + s.getCustomer().getId());
+        	        System.out.println("Customer Name  : " + s.getCustomer().getName());
+        	    }
+        	    if (s.getProduct() != null) {
+        	        System.out.println("Product ID     : " + s.getProduct().getId());
+        	        System.out.println("Product Name   : " + s.getProduct().getName());
+        	        System.out.println("Price          : " + s.getProduct().getPrice());
+        	        System.out.println("Stock Quantity : " + s.getProduct().getStockQuantity());
+        	    }
+
+        	    System.out.println("-------------------");
+
+        	});
+        }
+		transaction.commit();
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	}
+
+	public static void viewProductBuyers(int productId) { 
+		try(Session session=sessionfactory.openSession()){
+		Transaction transaction=session.beginTransaction();
+		String hqlquery="FROM OrderItem WHERE product.id = :productId";
+		List<OrderItem>list=session.createQuery( hqlquery,OrderItem.class).setParameter("productId", productId).getResultList();
+		if (list.isEmpty()) {
+            System.out.println("No students found.");
+        } else {
+        	list.forEach(o -> {
+        		 System.out.println("-------------------");
+                 System.out.println("Order ID      : " + o.getId());
+                 System.out.println("Customer ID   : " + o.getCustomer().getId());
+                 System.out.println("Customer Name : " + o.getCustomer().getName());
+                 System.out.println("Quantity      : " + o.getQuantity());
+                 System.out.println("Order Date    : " + o.getOrderDate());
+                 System.out.println("-------------------");
+        	});
+        }
+		transaction.commit();
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	}
+
+	public static void deleteCustomer(int customerId) { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Customer curr=session.get(Customer.class,customerId);
+			if (curr != null) {
+	            session.remove(curr);
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void deleteProduct(int productId) { 
+		try(Session session=sessionfactory.openSession()){
+			Transaction transaction=session.beginTransaction();
+			Product curr=session.get(Product.class,productId);
+			if (curr != null) {
+	            session.remove(curr);
+	        }
+			transaction.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,12 @@
+package com.daksh.springprogram04.config;
+import com.daksh.springprogram04.entities.*;
+public class SpringConfig {
+	public Chef chef() {
+		Chef ch=new Chef();
+		return ch;
+	}
+	public Restaurant res() {
+		Restaurant res=new Restaurant();
+		return res;
+	}
+}

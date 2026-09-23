@@ -1,0 +1,194 @@
+package com.daksh.jdbc;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class MainApp {
+
+    static String url = "jdbc:mysql://localhost:3306/company_db";
+    static String user = "root";
+    static String password = "DakshLakhi@69";
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+
+            System.out.println("\n===== EMPLOYEE CRUD MENU =====");
+            System.out.println("1. Add Employee");
+            System.out.println("2. View Employees");
+            System.out.println("3. Update Salary");
+            System.out.println("4. Delete Employee");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    addEmployee(sc);
+                    break;
+
+                case 2:
+                    viewEmployees();
+                    break;
+
+                case 3:
+                    updateSalary(sc);
+                    break;
+
+                case 4:
+                    deleteEmployee(sc);
+                    break;
+
+                case 5:
+                    System.out.println("Exiting...");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    // CREATE
+    static void addEmployee(Scanner sc) {
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String sql =
+                "INSERT INTO employee(emp_name, designation, salary) VALUES (?, ?, ?)";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            System.out.print("Enter name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter designation: ");
+            String desig = sc.nextLine();
+
+            System.out.print("Enter salary: ");
+            double salary = sc.nextDouble();
+            sc.nextLine();
+
+            ps.setString(1, name);
+            ps.setString(2, desig);
+            ps.setDouble(3, salary);
+
+            int rows = ps.executeUpdate();
+
+            System.out.println(rows + " employee added successfully!");
+
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // READ
+    static void viewEmployees() {
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String sql = "SELECT * FROM employee";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("\nID | NAME | DESIGNATION | SALARY");
+            System.out.println("----------------------------------------");
+
+            while (rs.next()) {
+
+                System.out.println(
+                    rs.getInt("emp_id") + " | " +
+                    rs.getString("emp_name") + " | " +
+                    rs.getString("designation") + " | " +
+                    rs.getDouble("salary")
+                );
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // UPDATE
+    static void updateSalary(Scanner sc) {
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String sql =
+                "UPDATE employee SET salary = ? WHERE emp_id = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            System.out.print("Enter employee ID: ");
+            int id = sc.nextInt();
+
+            System.out.print("Enter new salary: ");
+            double salary = sc.nextDouble();
+            sc.nextLine();
+
+            ps.setDouble(1, salary);
+            ps.setInt(2, id);
+
+            int rows = ps.executeUpdate();
+
+            System.out.println(rows + " employee updated successfully!");
+
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // DELETE
+    static void deleteEmployee(Scanner sc) {
+
+        try {
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String sql =
+                "DELETE FROM employee WHERE emp_id = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            System.out.print("Enter employee ID to delete: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            ps.setInt(1, id);
+
+            int rows = ps.executeUpdate();
+
+            System.out.println(rows + " employee deleted successfully!");
+
+            ps.close();
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

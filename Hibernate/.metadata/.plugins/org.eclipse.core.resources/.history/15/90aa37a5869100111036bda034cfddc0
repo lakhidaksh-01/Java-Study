@@ -1,0 +1,5 @@
+package com.daksh.hibernate_demo.entities;
+
+public class Student {
+
+}
