@@ -1,0 +1,40 @@
+CI/CD is a process that automates building, testing, and deploying applications.
+
+ - CI (Continuous Integration): Developers regularly merge code into a shared repository, where it is automatically built and tested.
+ - CD (Continuous Delivery): Code is automatically prepared for release, with deployment potentially requiring approval. (more safe)
+ - CD (Continuous Deployment): Code that passes all required checks is deployed automatically. (Less safe)
+
+before them
+
+Develop(coding then,branches merging) -> Build -> Test -> Release (development,staging for demos,production)
+
+Now
+
+CI automates Build and Test
+CD automates deployment
+
+
+
+Build do the task of 
+ - Download libraries - inbuilt functions or anotations we use
+ - Compile code - Converts .java into .class (Java bytecode, not directly machine language).
+ - Manage versions - Uses specified library versions. Does NOT automatically update them unless configured to do so.
+ - Run tests - if you have written some test for you code like for a particular 
+ - Copy configuration	Includes files like application.yml in the JAR so the application can read its settings.
+ - Package - combines all into Spring boot jar
+
+maven is a build automation tool.
+
+Test - to execute the test for each service you right in you backend code.
+
+
+CI/CD tools
+- GitHub Actions: Automates workflows directly from GitHub. 2019
+- Jenkins: Automation server commonly used for CI/CD. 2011
+
+Deployement stratergies
+ - blue-green - old version and new version
+ - canary - 5% -> 10% -> 25%
+
+UAT = User Acceptance Testing
+UAT is where the client or actual users test an application before it goes live in production to confirm it meets their requirements.

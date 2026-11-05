@@ -2,28 +2,23 @@ JVM = Java Virtual Machine
 
 The JVM is a software engine that runs Java programs. It acts as a layer between your Java code and the operating system.
 
-5 different types of memory areas in JVM are:
+1\. Method Area: Stores class information, like the blueprint of a `Student` class.
 
-Method Area: 
-1. Class structure and information
-2. methods
-3. static variables
+2\. Heap Memory: Stores actual objects, like `Student s = new Student();`.
 
+3\. Stack Memory: Stores local variables and method calls, like `int age = 20;` inside `main()`.
 
-Heap Memory:
-1. Objects and instance variables, arrays.
+4\. PC Register: Tracks which instruction the CPU-independent JVM execution should execute next, like moving from line 5 to line 6.
 
-Stack Memory:
-1. Local variables
-2. Method calls
+5\. Native Method Stack: Handles methods written in other languages like C/C++ that Java calls.
 
+Easy trick to remember:
 
-Program Counter (PC) Register: 
-1. Keeps track of the address of the currently executing instruction.
-
-
-Native Method Stack:
-1. Contains all the native methods used in the application.
+- Method Area → Blueprint
+- Heap → Objects
+- Stack → Local variables & method execution (the actual values stored like `int age = 20;`)
+- PC Register → Next instruction
+- Native Stack → Non-Java methods
 
 
 

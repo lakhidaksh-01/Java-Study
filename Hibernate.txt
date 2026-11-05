@@ -102,6 +102,12 @@ hibernate.cfg.xml
 
 
 
+hibernate.dialect	Tells Hibernate which database you're using (MySQL in your case), so it generates compatible SQL.
+hibernate.show_sql	true → Displays SQL queries in the console.
+hibernate.format_sql	true → Makes SQL queries easier to read by formatting them.
+hibernate.hbm2ddl.auto	update → Automatically updates the database table structure based on your Java entity classes.
+
+
 enity class
 
 package com.daksh.hibernate_demo.entities;
